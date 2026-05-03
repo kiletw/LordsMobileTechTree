@@ -191,7 +191,7 @@ function resolveSpecialCostName(itemName: string | null, itemId: number, t: (key
 }
 
 function formatEffectMetricLabel(effectName: string, formattedValue: string) {
-  return /[+\-]$/.test(effectName) ? `${effectName}${formattedValue}` : `${effectName}: ${formattedValue}`
+  return /[+-]$/.test(effectName) ? `${effectName}${formattedValue}` : `${effectName}: ${formattedValue}`
 }
 
 function getEffectDelta(levels: TechLevel[], level: TechLevel) {
@@ -381,24 +381,6 @@ function App() {
     }
   }, [])
 
-  useEffect(() => {
-    if (!dataset || dataset.kinds.length === 0) {
-      return
-    }
-
-    const firstKindId = dataset.kinds[0].id
-    const activeKindId = selectedKindId ?? firstKindId
-    const kindExists = dataset.kinds.some((kind) => kind.id === activeKindId)
-
-    if (!kindExists) {
-      setSelectedKindId(firstKindId)
-      return
-    }
-
-    if (selectedKindId === null) {
-      setSelectedKindId(activeKindId)
-    }
-  }, [dataset, selectedKindId])
 
   const kinds = dataset?.kinds ?? []
   const techs = dataset?.techs ?? []
@@ -406,7 +388,9 @@ function App() {
   const effectById = new Map(effects.map((effect) => [effect.ID, effect]))
   const decodedTreeNodeById = new Map(treeNodes.map((node) => [node.id, decodeTreeNode(node.rawBytesHex, node.id)]))
 
-  const activeKindId = selectedKindId ?? kinds[0]?.id ?? null
+  const activeKindId = (selectedKindId !== null && kinds.some((k) => k.id === selectedKindId))
+    ? selectedKindId
+    : kinds[0]?.id ?? null
   const visibleTechs = techs
     .filter((tech) => tech.kindId === activeKindId)
     .sort((left, right) => left.treeNodeId - right.treeNodeId || left.id - right.id)
@@ -598,16 +582,6 @@ function App() {
     }
   }
 
-  useEffect(() => {
-    if (visibleTechs.length === 0) {
-      setSelectedTechId(null)
-      return
-    }
-
-    if (!visibleTechs.some((tech) => tech.id === selectedTechId)) {
-      setSelectedTechId(visibleTechs[0].id)
-    }
-  }, [selectedTechId, visibleTechs])
 
   function getCurrentLevel(tech: TechEntry) {
     if (!isPlannerSupported(tech)) {
@@ -670,7 +644,7 @@ function App() {
 
   const numericResearchSpeed = Number(researchSpeedBonus) || 0
   const researchTimeFactor = 1 / (1 + Math.max(numericResearchSpeed, 0) / 100)
-  const selectedTech = techs.find((tech) => tech.id === selectedTechId) ?? visibleTechs[0] ?? null
+  const selectedTech = visibleTechs.find((tech) => tech.id === selectedTechId) ?? visibleTechs[0] ?? null
   const plannerReadyTechCount = techs.filter((tech) => isPlannerSupported(tech)).length
   const catalogOnlyTechCount = techs.filter((tech) => tech.dataStatus === 'supplemental-only' && !isPlannerSupported(tech)).length
 

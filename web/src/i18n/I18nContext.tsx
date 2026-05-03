@@ -146,6 +146,7 @@ export const I18nProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
 // ─── Hook ───────────────────────────────────────────────
 
+// eslint-disable-next-line react-refresh/only-export-components
 export function useI18n(): I18nContextType {
   const ctx = useContext(I18nContext);
   if (!ctx) {
