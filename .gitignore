@@ -1,0 +1,32 @@
+# OS / Editor
+.DS_Store
+Thumbs.db
+.idea/
+.vs/
+.vscode/*
+!.vscode/extensions.json
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Logs
+*.log
+logs/
+
+# .NET
+**/bin/
+**/obj/
+
+# Node / Vite
+web/node_modules/
+web/dist/
+web/.vite/
+web/node_modules/.vite/
+web/node_modules/.tmp/
+
+# Local env
+*.local
+
+# Raw extracted client assets should stay local
+data/raw/

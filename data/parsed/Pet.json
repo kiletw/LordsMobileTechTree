@@ -1,0 +1,1141 @@
+[
+  {
+    "ID": 1,
+    "HeroID": 201,
+    "NameID": 6528,
+    "Name": "重劍士",
+    "Rare": 5,
+    "PetSkill": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "Tactics": 0,
+    "TacticsSkillName": null,
+    "AwakenItem": 3604,
+    "AwakenItemCount": 160
+  },
+  {
+    "ID": 2,
+    "HeroID": 211,
+    "NameID": 6541,
+    "Name": "劍鬥士",
+    "Rare": 5,
+    "PetSkill": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "Tactics": 0,
+    "TacticsSkillName": null,
+    "AwakenItem": 3604,
+    "AwakenItemCount": 160
+  },
+  {
+    "ID": 3,
+    "HeroID": 202,
+    "NameID": 1693,
+    "Name": "獵弓手",
+    "Rare": 5,
+    "PetSkill": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "Tactics": 0,
+    "TacticsSkillName": null,
+    "AwakenItem": 3604,
+    "AwakenItemCount": 160
+  },
+  {
+    "ID": 4,
+    "HeroID": 212,
+    "NameID": 1745,
+    "Name": "精銳弓手",
+    "Rare": 5,
+    "PetSkill": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "Tactics": 0,
+    "TacticsSkillName": null,
+    "AwakenItem": 3604,
+    "AwakenItemCount": 160
+  },
+  {
+    "ID": 5,
+    "HeroID": 203,
+    "NameID": 6546,
+    "Name": "巡邏法師",
+    "Rare": 5,
+    "PetSkill": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "Tactics": 0,
+    "TacticsSkillName": null,
+    "AwakenItem": 3604,
+    "AwakenItemCount": 160
+  },
+  {
+    "ID": 6,
+    "HeroID": 213,
+    "NameID": 6560,
+    "Name": "元素法師",
+    "Rare": 5,
+    "PetSkill": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "Tactics": 0,
+    "TacticsSkillName": null,
+    "AwakenItem": 3604,
+    "AwakenItemCount": 160
+  },
+  {
+    "ID": 7,
+    "HeroID": 204,
+    "NameID": 1697,
+    "Name": "遠古騎士",
+    "Rare": 5,
+    "PetSkill": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "Tactics": 0,
+    "TacticsSkillName": null,
+    "AwakenItem": 3604,
+    "AwakenItemCount": 160
+  },
+  {
+    "ID": 8,
+    "HeroID": 2113,
+    "NameID": 1749,
+    "Name": "哥布林戰士",
+    "Rare": 1,
+    "PetSkill": [
+      59,
+      0,
+      0,
+      0
+    ],
+    "Tactics": 5,
+    "TacticsSkillName": "虛空突刺",
+    "AwakenItem": 3603,
+    "AwakenItemCount": 20
+  },
+  {
+    "ID": 9,
+    "HeroID": 205,
+    "NameID": 1699,
+    "Name": "黑暗劍士",
+    "Rare": 5,
+    "PetSkill": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "Tactics": 0,
+    "TacticsSkillName": null,
+    "AwakenItem": 3604,
+    "AwakenItemCount": 160
+  },
+  {
+    "ID": 10,
+    "HeroID": 215,
+    "NameID": 6537,
+    "Name": "雪猿",
+    "Rare": 1,
+    "PetSkill": [
+      67,
+      0,
+      0,
+      0
+    ],
+    "Tactics": 10,
+    "TacticsSkillName": "閃電戰術",
+    "AwakenItem": 3603,
+    "AwakenItemCount": 20
+  },
+  {
+    "ID": 11,
+    "HeroID": 206,
+    "NameID": 1701,
+    "Name": "墮落法師",
+    "Rare": 3,
+    "PetSkill": [
+      39,
+      38,
+      79,
+      0
+    ],
+    "Tactics": 26,
+    "TacticsSkillName": "靈魂獻祭",
+    "AwakenItem": 3603,
+    "AwakenItemCount": 80
+  },
+  {
+    "ID": 12,
+    "HeroID": 216,
+    "NameID": 6543,
+    "Name": "妖術士",
+    "Rare": 2,
+    "PetSkill": [
+      11,
+      76,
+      0,
+      0
+    ],
+    "Tactics": 15,
+    "TacticsSkillName": "強化妖術",
+    "AwakenItem": 3603,
+    "AwakenItemCount": 40
+  },
+  {
+    "ID": 13,
+    "HeroID": 207,
+    "NameID": 6589,
+    "Name": "骷髏戰士",
+    "Rare": 2,
+    "PetSkill": [
+      31,
+      74,
+      0,
+      0
+    ],
+    "Tactics": 19,
+    "TacticsSkillName": "不屈戰意",
+    "AwakenItem": 3603,
+    "AwakenItemCount": 40
+  },
+  {
+    "ID": 14,
+    "HeroID": 217,
+    "NameID": 6577,
+    "Name": "亡靈先鋒",
+    "Rare": 5,
+    "PetSkill": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "Tactics": 0,
+    "TacticsSkillName": null,
+    "AwakenItem": 3604,
+    "AwakenItemCount": 160
+  },
+  {
+    "ID": 15,
+    "HeroID": 208,
+    "NameID": 1705,
+    "Name": "半獸人",
+    "Rare": 5,
+    "PetSkill": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "Tactics": 0,
+    "TacticsSkillName": null,
+    "AwakenItem": 3604,
+    "AwakenItemCount": 160
+  },
+  {
+    "ID": 16,
+    "HeroID": 218,
+    "NameID": 6542,
+    "Name": "獨眼怪",
+    "Rare": 5,
+    "PetSkill": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "Tactics": 0,
+    "TacticsSkillName": null,
+    "AwakenItem": 3604,
+    "AwakenItemCount": 160
+  },
+  {
+    "ID": 17,
+    "HeroID": 209,
+    "NameID": 1707,
+    "Name": "樹精",
+    "Rare": 1,
+    "PetSkill": [
+      62,
+      0,
+      0,
+      0
+    ],
+    "Tactics": 2,
+    "TacticsSkillName": "凋葉腐朽",
+    "AwakenItem": 3603,
+    "AwakenItemCount": 20
+  },
+  {
+    "ID": 18,
+    "HeroID": 219,
+    "NameID": 1759,
+    "Name": "熔岩怪",
+    "Rare": 1,
+    "PetSkill": [
+      60,
+      0,
+      0,
+      0
+    ],
+    "Tactics": 3,
+    "TacticsSkillName": "火岩爆破",
+    "AwakenItem": 3603,
+    "AwakenItemCount": 20
+  },
+  {
+    "ID": 19,
+    "HeroID": 210,
+    "NameID": 1709,
+    "Name": "刺龜",
+    "Rare": 1,
+    "PetSkill": [
+      64,
+      0,
+      0,
+      0
+    ],
+    "Tactics": 7,
+    "TacticsSkillName": "尖刺衝撞",
+    "AwakenItem": 3603,
+    "AwakenItemCount": 20
+  },
+  {
+    "ID": 20,
+    "HeroID": 220,
+    "NameID": 6587,
+    "Name": "骷髏龜",
+    "Rare": 5,
+    "PetSkill": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "Tactics": 0,
+    "TacticsSkillName": null,
+    "AwakenItem": 3604,
+    "AwakenItemCount": 160
+  },
+  {
+    "ID": 21,
+    "HeroID": 192,
+    "NameID": 6626,
+    "Name": "泡泡龜",
+    "Rare": 5,
+    "PetSkill": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "Tactics": 0,
+    "TacticsSkillName": null,
+    "AwakenItem": 3604,
+    "AwakenItemCount": 160
+  },
+  {
+    "ID": 22,
+    "HeroID": 224,
+    "NameID": 1737,
+    "Name": "魚人",
+    "Rare": 5,
+    "PetSkill": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "Tactics": 0,
+    "TacticsSkillName": null,
+    "AwakenItem": 3604,
+    "AwakenItemCount": 160
+  },
+  {
+    "ID": 23,
+    "HeroID": 193,
+    "NameID": 1789,
+    "Name": "腐化魚人",
+    "Rare": 5,
+    "PetSkill": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "Tactics": 0,
+    "TacticsSkillName": null,
+    "AwakenItem": 3604,
+    "AwakenItemCount": 160
+  },
+  {
+    "ID": 24,
+    "HeroID": 225,
+    "NameID": 1739,
+    "Name": "地精",
+    "Rare": 1,
+    "PetSkill": [
+      63,
+      0,
+      0,
+      0
+    ],
+    "Tactics": 8,
+    "TacticsSkillName": "箭矢毒化",
+    "AwakenItem": 3603,
+    "AwakenItemCount": 20
+  },
+  {
+    "ID": 25,
+    "HeroID": 194,
+    "NameID": 6637,
+    "Name": "鼠人巫醫",
+    "Rare": 3,
+    "PetSkill": [
+      35,
+      21,
+      88,
+      0
+    ],
+    "Tactics": 27,
+    "TacticsSkillName": "巫醫祝禱",
+    "AwakenItem": 3603,
+    "AwakenItemCount": 80
+  },
+  {
+    "ID": 26,
+    "HeroID": 226,
+    "NameID": 6567,
+    "Name": "矮人工匠",
+    "Rare": 1,
+    "PetSkill": [
+      61,
+      0,
+      0,
+      0
+    ],
+    "Tactics": 4,
+    "TacticsSkillName": "戰前武裝",
+    "AwakenItem": 3603,
+    "AwakenItemCount": 20
+  },
+  {
+    "ID": 27,
+    "HeroID": 195,
+    "NameID": 6568,
+    "Name": "矮人馴獸師",
+    "Rare": 1,
+    "PetSkill": [
+      66,
+      0,
+      0,
+      0
+    ],
+    "Tactics": 9,
+    "TacticsSkillName": "猛擊震地",
+    "AwakenItem": 3603,
+    "AwakenItemCount": 20
+  },
+  {
+    "ID": 28,
+    "HeroID": 227,
+    "NameID": 6517,
+    "Name": "風精靈",
+    "Rare": 3,
+    "PetSkill": [
+      10,
+      43,
+      70,
+      0
+    ],
+    "Tactics": 32,
+    "TacticsSkillName": "颶風干擾",
+    "AwakenItem": 3603,
+    "AwakenItemCount": 80
+  },
+  {
+    "ID": 29,
+    "HeroID": 196,
+    "NameID": 6515,
+    "Name": "水精靈",
+    "Rare": 2,
+    "PetSkill": [
+      32,
+      71,
+      0,
+      0
+    ],
+    "Tactics": 6,
+    "TacticsSkillName": "水沫窒息",
+    "AwakenItem": 3603,
+    "AwakenItemCount": 40
+  },
+  {
+    "ID": 30,
+    "HeroID": 228,
+    "NameID": 6514,
+    "Name": "土精靈",
+    "Rare": 2,
+    "PetSkill": [
+      34,
+      91,
+      0,
+      0
+    ],
+    "Tactics": 1,
+    "TacticsSkillName": "土崩甲裂",
+    "AwakenItem": 3603,
+    "AwakenItemCount": 40
+  },
+  {
+    "ID": 31,
+    "HeroID": 197,
+    "NameID": 6516,
+    "Name": "火精靈",
+    "Rare": 3,
+    "PetSkill": [
+      75,
+      42,
+      78,
+      0
+    ],
+    "Tactics": 16,
+    "TacticsSkillName": "鬥志昂揚",
+    "AwakenItem": 3603,
+    "AwakenItemCount": 80
+  },
+  {
+    "ID": 32,
+    "HeroID": 230,
+    "NameID": 6585,
+    "Name": "極樂鳥",
+    "Rare": 2,
+    "PetSkill": [
+      33,
+      77,
+      0,
+      0
+    ],
+    "Tactics": 20,
+    "TacticsSkillName": "振奮之舞",
+    "AwakenItem": 3603,
+    "AwakenItemCount": 40
+  },
+  {
+    "ID": 33,
+    "HeroID": 199,
+    "NameID": 6624,
+    "Name": "狂想鳥",
+    "Rare": 2,
+    "PetSkill": [
+      65,
+      73,
+      0,
+      0
+    ],
+    "Tactics": 14,
+    "TacticsSkillName": "激勵鞭策",
+    "AwakenItem": 3603,
+    "AwakenItemCount": 40
+  },
+  {
+    "ID": 34,
+    "HeroID": 229,
+    "NameID": 1797,
+    "Name": "砲塔",
+    "Rare": 5,
+    "PetSkill": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "Tactics": 0,
+    "TacticsSkillName": null,
+    "AwakenItem": 3604,
+    "AwakenItemCount": 160
+  },
+  {
+    "ID": 35,
+    "HeroID": 232,
+    "NameID": 6401,
+    "Name": "冰霜翼龍",
+    "Rare": 5,
+    "PetSkill": [
+      55,
+      22,
+      99,
+      0
+    ],
+    "Tactics": 40,
+    "TacticsSkillName": "寒霜凍骨",
+    "AwakenItem": 3604,
+    "AwakenItemCount": 160
+  },
+  {
+    "ID": 36,
+    "HeroID": 2114,
+    "NameID": 6402,
+    "Name": "獨眼巨人",
+    "Rare": 5,
+    "PetSkill": [
+      51,
+      48,
+      94,
+      0
+    ],
+    "Tactics": 38,
+    "TacticsSkillName": "巨人之力",
+    "AwakenItem": 3604,
+    "AwakenItemCount": 160
+  },
+  {
+    "ID": 37,
+    "HeroID": 234,
+    "NameID": 6413,
+    "Name": "南瓜戰車",
+    "Rare": 5,
+    "PetSkill": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "Tactics": 0,
+    "TacticsSkillName": null,
+    "AwakenItem": 3604,
+    "AwakenItemCount": 160
+  },
+  {
+    "ID": 38,
+    "HeroID": 235,
+    "NameID": 6403,
+    "Name": "大腳雪怪",
+    "Rare": 4,
+    "PetSkill": [
+      29,
+      5,
+      87,
+      0
+    ],
+    "Tactics": 34,
+    "TacticsSkillName": "冰雪護盾",
+    "AwakenItem": 3604,
+    "AwakenItemCount": 64
+  },
+  {
+    "ID": 39,
+    "HeroID": 236,
+    "NameID": 6404,
+    "Name": "翡翠雲蛟",
+    "Rare": 5,
+    "PetSkill": [
+      102,
+      103,
+      104,
+      0
+    ],
+    "Tactics": 36,
+    "TacticsSkillName": "天降神火",
+    "AwakenItem": 3604,
+    "AwakenItemCount": 160
+  },
+  {
+    "ID": 40,
+    "HeroID": 237,
+    "NameID": 6405,
+    "Name": "格里芬",
+    "Rare": 4,
+    "PetSkill": [
+      36,
+      19,
+      84,
+      0
+    ],
+    "Tactics": 21,
+    "TacticsSkillName": "逆風強襲",
+    "AwakenItem": 3604,
+    "AwakenItemCount": 64
+  },
+  {
+    "ID": 41,
+    "HeroID": 238,
+    "NameID": 6406,
+    "Name": "掘地蛆蟲",
+    "Rare": 4,
+    "PetSkill": [
+      2,
+      6,
+      89,
+      0
+    ],
+    "Tactics": 11,
+    "TacticsSkillName": "萬蟲來襲",
+    "AwakenItem": 3604,
+    "AwakenItemCount": 64
+  },
+  {
+    "ID": 42,
+    "HeroID": 239,
+    "NameID": 6407,
+    "Name": "荊棘花妖",
+    "Rare": 5,
+    "PetSkill": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "Tactics": 0,
+    "TacticsSkillName": null,
+    "AwakenItem": 3604,
+    "AwakenItemCount": 160
+  },
+  {
+    "ID": 43,
+    "HeroID": 240,
+    "NameID": 6408,
+    "Name": "地獄公爵",
+    "Rare": 5,
+    "PetSkill": [
+      7,
+      47,
+      83,
+      0
+    ],
+    "Tactics": 31,
+    "TacticsSkillName": "地獄詛咒",
+    "AwakenItem": 3604,
+    "AwakenItemCount": 128
+  },
+  {
+    "ID": 44,
+    "HeroID": 241,
+    "NameID": 6409,
+    "Name": "哈普剛肯",
+    "Rare": 3,
+    "PetSkill": [
+      46,
+      4,
+      90,
+      0
+    ],
+    "Tactics": 22,
+    "TacticsSkillName": "雷霆反擊",
+    "AwakenItem": 3603,
+    "AwakenItemCount": 80
+  },
+  {
+    "ID": 45,
+    "HeroID": 242,
+    "NameID": 6410,
+    "Name": "奪魂使者",
+    "Rare": 5,
+    "PetSkill": [
+      18,
+      13,
+      101,
+      0
+    ],
+    "Tactics": 0,
+    "TacticsSkillName": null,
+    "AwakenItem": 3604,
+    "AwakenItemCount": 128
+  },
+  {
+    "ID": 46,
+    "HeroID": 243,
+    "NameID": 6411,
+    "Name": "布萊斯",
+    "Rare": 4,
+    "PetSkill": [
+      8,
+      14,
+      80,
+      0
+    ],
+    "Tactics": 33,
+    "TacticsSkillName": "野性庇護",
+    "AwakenItem": 3604,
+    "AwakenItemCount": 64
+  },
+  {
+    "ID": 47,
+    "HeroID": 245,
+    "NameID": 6414,
+    "Name": "潮汐巨人",
+    "Rare": 5,
+    "PetSkill": [
+      56,
+      17,
+      93,
+      0
+    ],
+    "Tactics": 0,
+    "TacticsSkillName": null,
+    "AwakenItem": 3604,
+    "AwakenItemCount": 128
+  },
+  {
+    "ID": 48,
+    "HeroID": 246,
+    "NameID": 6415,
+    "Name": "貪食天使",
+    "Rare": 5,
+    "PetSkill": [
+      49,
+      50,
+      100,
+      0
+    ],
+    "Tactics": 41,
+    "TacticsSkillName": "天使制裁",
+    "AwakenItem": 3604,
+    "AwakenItemCount": 160
+  },
+  {
+    "ID": 49,
+    "HeroID": 247,
+    "NameID": 6416,
+    "Name": "女王蜂",
+    "Rare": 5,
+    "PetSkill": [
+      57,
+      44,
+      97,
+      0
+    ],
+    "Tactics": 39,
+    "TacticsSkillName": "猛毒蜂群",
+    "AwakenItem": 3604,
+    "AwakenItemCount": 160
+  },
+  {
+    "ID": 50,
+    "HeroID": 248,
+    "NameID": 6417,
+    "Name": "雙頭冥龍",
+    "Rare": 5,
+    "PetSkill": [
+      16,
+      45,
+      92,
+      0
+    ],
+    "Tactics": 37,
+    "TacticsSkillName": "冥龍吐息",
+    "AwakenItem": 3604,
+    "AwakenItemCount": 160
+  },
+  {
+    "ID": 51,
+    "HeroID": 249,
+    "NameID": 6418,
+    "Name": "機關木馬",
+    "Rare": 5,
+    "PetSkill": [
+      15,
+      41,
+      98,
+      0
+    ],
+    "Tactics": 0,
+    "TacticsSkillName": null,
+    "AwakenItem": 3604,
+    "AwakenItemCount": 128
+  },
+  {
+    "ID": 52,
+    "HeroID": 252,
+    "NameID": 6421,
+    "Name": "金布林",
+    "Rare": 3,
+    "PetSkill": [
+      12,
+      24,
+      68,
+      0
+    ],
+    "Tactics": 24,
+    "TacticsSkillName": "懸賞殺敵",
+    "AwakenItem": 3603,
+    "AwakenItemCount": 80
+  },
+  {
+    "ID": 53,
+    "HeroID": 253,
+    "NameID": 6422,
+    "Name": "米奇林",
+    "Rare": 2,
+    "PetSkill": [
+      25,
+      69,
+      0,
+      0
+    ],
+    "Tactics": 12,
+    "TacticsSkillName": "天降補給",
+    "AwakenItem": 3603,
+    "AwakenItemCount": 40
+  },
+  {
+    "ID": 54,
+    "HeroID": 254,
+    "NameID": 6423,
+    "Name": "木不林",
+    "Rare": 2,
+    "PetSkill": [
+      26,
+      72,
+      0,
+      0
+    ],
+    "Tactics": 13,
+    "TacticsSkillName": "木靈守護",
+    "AwakenItem": 3603,
+    "AwakenItemCount": 40
+  },
+  {
+    "ID": 55,
+    "HeroID": 255,
+    "NameID": 6424,
+    "Name": "石載靈",
+    "Rare": 2,
+    "PetSkill": [
+      27,
+      85,
+      0,
+      0
+    ],
+    "Tactics": 17,
+    "TacticsSkillName": "岩甲護持",
+    "AwakenItem": 3603,
+    "AwakenItemCount": 40
+  },
+  {
+    "ID": 56,
+    "HeroID": 256,
+    "NameID": 6425,
+    "Name": "鐵定靈",
+    "Rare": 2,
+    "PetSkill": [
+      28,
+      1,
+      0,
+      0
+    ],
+    "Tactics": 18,
+    "TacticsSkillName": "鐵殼盔甲",
+    "AwakenItem": 3603,
+    "AwakenItemCount": 40
+  },
+  {
+    "ID": 57,
+    "HeroID": 260,
+    "NameID": 6437,
+    "Name": "悠兔寶",
+    "Rare": 5,
+    "PetSkill": [
+      53,
+      20,
+      95,
+      0
+    ],
+    "Tactics": 42,
+    "TacticsSkillName": "憤怒兔擊",
+    "AwakenItem": 3604,
+    "AwakenItemCount": 160
+  },
+  {
+    "ID": 58,
+    "HeroID": 261,
+    "NameID": 6438,
+    "Name": "寶之靈",
+    "Rare": 4,
+    "PetSkill": [
+      37,
+      40,
+      86,
+      0
+    ],
+    "Tactics": 35,
+    "TacticsSkillName": "寶之護盾",
+    "AwakenItem": 3604,
+    "AwakenItemCount": 64
+  },
+  {
+    "ID": 59,
+    "HeroID": 262,
+    "NameID": 6432,
+    "Name": "鬼靈晶",
+    "Rare": 3,
+    "PetSkill": [
+      3,
+      30,
+      81,
+      0
+    ],
+    "Tactics": 23,
+    "TacticsSkillName": "晶化武器",
+    "AwakenItem": 3603,
+    "AwakenItemCount": 80
+  },
+  {
+    "ID": 60,
+    "HeroID": 263,
+    "NameID": 6433,
+    "Name": "愛大星",
+    "Rare": 3,
+    "PetSkill": [
+      9,
+      23,
+      82,
+      0
+    ],
+    "Tactics": 25,
+    "TacticsSkillName": "強弓射擊",
+    "AwakenItem": 3603,
+    "AwakenItemCount": 80
+  },
+  {
+    "ID": 61,
+    "HeroID": 266,
+    "NameID": 6439,
+    "Name": "深淵領主",
+    "Rare": 5,
+    "PetSkill": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "Tactics": 0,
+    "TacticsSkillName": null,
+    "AwakenItem": 3604,
+    "AwakenItemCount": 160
+  },
+  {
+    "ID": 62,
+    "HeroID": 250,
+    "NameID": 6419,
+    "Name": "寶箱守護者",
+    "Rare": 5,
+    "PetSkill": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "Tactics": 0,
+    "TacticsSkillName": null,
+    "AwakenItem": 3604,
+    "AwakenItemCount": 160
+  },
+  {
+    "ID": 63,
+    "HeroID": 251,
+    "NameID": 6420,
+    "Name": "腐化殭屍",
+    "Rare": 5,
+    "PetSkill": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "Tactics": 0,
+    "TacticsSkillName": null,
+    "AwakenItem": 3604,
+    "AwakenItemCount": 160
+  },
+  {
+    "ID": 64,
+    "HeroID": 244,
+    "NameID": 6412,
+    "Name": "遠古魔像",
+    "Rare": 5,
+    "PetSkill": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "Tactics": 0,
+    "TacticsSkillName": null,
+    "AwakenItem": 3604,
+    "AwakenItemCount": 160
+  },
+  {
+    "ID": 65,
+    "HeroID": 257,
+    "NameID": 6426,
+    "Name": "巫毒薩滿",
+    "Rare": 5,
+    "PetSkill": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "Tactics": 0,
+    "TacticsSkillName": null,
+    "AwakenItem": 3604,
+    "AwakenItemCount": 160
+  },
+  {
+    "ID": 66,
+    "HeroID": 258,
+    "NameID": 6427,
+    "Name": "阿薩庫蘇",
+    "Rare": 5,
+    "PetSkill": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "Tactics": 0,
+    "TacticsSkillName": null,
+    "AwakenItem": 3604,
+    "AwakenItemCount": 160
+  },
+  {
+    "ID": 67,
+    "HeroID": 232,
+    "NameID": 6401,
+    "Name": "冰霜翼龍",
+    "Rare": 5,
+    "PetSkill": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "Tactics": 43,
+    "TacticsSkillName": "寒霜凍骨",
+    "AwakenItem": 3604,
+    "AwakenItemCount": 160
+  }
+]

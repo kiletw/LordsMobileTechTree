@@ -1,0 +1,42 @@
+{
+  "clientVersion": "",
+  "extractedAt": "",
+  "sourceRoot": "data/raw",
+  "files": [
+    {
+      "name": "Tech.bytes",
+      "checksum": "",
+      "recordCount": 0,
+      "structSize": 0,
+      "notes": ""
+    },
+    {
+      "name": "TechKind.bytes",
+      "checksum": "",
+      "recordCount": 0,
+      "structSize": 0,
+      "notes": ""
+    },
+    {
+      "name": "TechLv.bytes",
+      "checksum": "",
+      "recordCount": 0,
+      "structSize": 0,
+      "notes": ""
+    },
+    {
+      "name": "TechTree.bytes",
+      "checksum": "",
+      "recordCount": 0,
+      "structSize": 0,
+      "notes": ""
+    },
+    {
+      "name": "StringTable.bytes",
+      "checksum": "",
+      "recordCount": 0,
+      "structSize": 0,
+      "notes": "paired with StringTable2.bytes"
+    }
+  ]
+}

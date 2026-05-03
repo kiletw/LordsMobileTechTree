@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Lords Mobile Tech Tree",
+  "type": "object",
+  "required": ["version", "techs"],
+  "properties": {
+    "version": {
+      "type": "string"
+    },
+    "techs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "nameKey"],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "kind": {
+            "type": "integer"
+          },
+          "nameKey": {
+            "type": "integer"
+          },
+          "descriptionKey": {
+            "type": "integer"
+          },
+          "icon": {
+            "type": "string"
+          },
+          "levels": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "level": {
+                  "type": "integer"
+                },
+                "cost": {
+                  "type": "object"
+                },
+                "timeSeconds": {
+                  "type": "integer"
+                },
+                "powerGain": {
+                  "type": "integer"
+                }
+              }
+            }
+          },
+          "prerequisites": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          }
+        }
+      }
+    }
+  }
+}
