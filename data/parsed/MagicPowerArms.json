@@ -1,0 +1,2162 @@
+[
+  {
+    "ID": 1,
+    "GroupID": 257,
+    "Rare": 0,
+    "Type": 27,
+    "NameID": 30,
+    "Name": "(已滿)",
+    "DescriptionID": 0,
+    "Description": null,
+    "Icon": 0,
+    "ItemID": 0,
+    "Effects": [
+      299,
+      0,
+      0,
+      0
+    ],
+    "Values": [
+      516129,
+      2621936,
+      0,
+      0
+    ]
+  },
+  {
+    "ID": 2,
+    "GroupID": 513,
+    "Rare": 0,
+    "Type": 0,
+    "NameID": 0,
+    "Name": null,
+    "DescriptionID": 0,
+    "Description": null,
+    "Icon": 0,
+    "ItemID": 0,
+    "Effects": [
+      299,
+      0,
+      0,
+      0
+    ],
+    "Values": [
+      1032258,
+      5243376,
+      0,
+      0
+    ]
+  },
+  {
+    "ID": 3,
+    "GroupID": 769,
+    "Rare": 0,
+    "Type": 0,
+    "NameID": 0,
+    "Name": null,
+    "DescriptionID": 0,
+    "Description": null,
+    "Icon": 0,
+    "ItemID": 0,
+    "Effects": [
+      299,
+      0,
+      0,
+      0
+    ],
+    "Values": [
+      1548387,
+      7864816,
+      0,
+      0
+    ]
+  },
+  {
+    "ID": 4,
+    "GroupID": 1025,
+    "Rare": 0,
+    "Type": 0,
+    "NameID": 0,
+    "Name": null,
+    "DescriptionID": 0,
+    "Description": null,
+    "Icon": 0,
+    "ItemID": 0,
+    "Effects": [
+      299,
+      0,
+      0,
+      0
+    ],
+    "Values": [
+      2064516,
+      10486256,
+      0,
+      0
+    ]
+  },
+  {
+    "ID": 5,
+    "GroupID": 1281,
+    "Rare": 0,
+    "Type": 0,
+    "NameID": 0,
+    "Name": null,
+    "DescriptionID": 0,
+    "Description": null,
+    "Icon": 0,
+    "ItemID": 0,
+    "Effects": [
+      299,
+      0,
+      0,
+      0
+    ],
+    "Values": [
+      2580645,
+      13107696,
+      0,
+      0
+    ]
+  },
+  {
+    "ID": 6,
+    "GroupID": 1537,
+    "Rare": 0,
+    "Type": 27,
+    "NameID": 35,
+    "Name": "你還可以選擇更多英雄，確定要繼續嗎？",
+    "DescriptionID": 1282,
+    "Description": "驅逐",
+    "Icon": 768,
+    "ItemID": 5,
+    "Effects": [
+      460,
+      0,
+      0,
+      0
+    ],
+    "Values": [
+      3200000,
+      15729136,
+      0,
+      0
+    ]
+  },
+  {
+    "ID": 7,
+    "GroupID": 1793,
+    "Rare": 0,
+    "Type": 0,
+    "NameID": 0,
+    "Name": null,
+    "DescriptionID": 0,
+    "Description": null,
+    "Icon": 0,
+    "ItemID": 0,
+    "Effects": [
+      460,
+      0,
+      0,
+      0
+    ],
+    "Values": [
+      3819355,
+      18350576,
+      0,
+      0
+    ]
+  },
+  {
+    "ID": 8,
+    "GroupID": 2049,
+    "Rare": 0,
+    "Type": 0,
+    "NameID": 0,
+    "Name": null,
+    "DescriptionID": 0,
+    "Description": null,
+    "Icon": 0,
+    "ItemID": 0,
+    "Effects": [
+      460,
+      0,
+      0,
+      0
+    ],
+    "Values": [
+      4438710,
+      20972016,
+      0,
+      0
+    ]
+  },
+  {
+    "ID": 9,
+    "GroupID": 2305,
+    "Rare": 0,
+    "Type": 0,
+    "NameID": 0,
+    "Name": null,
+    "DescriptionID": 0,
+    "Description": null,
+    "Icon": 0,
+    "ItemID": 0,
+    "Effects": [
+      460,
+      0,
+      0,
+      0
+    ],
+    "Values": [
+      5058065,
+      23593456,
+      0,
+      0
+    ]
+  },
+  {
+    "ID": 10,
+    "GroupID": 2561,
+    "Rare": 0,
+    "Type": 0,
+    "NameID": 0,
+    "Name": null,
+    "DescriptionID": 0,
+    "Description": null,
+    "Icon": 0,
+    "ItemID": 0,
+    "Effects": [
+      460,
+      0,
+      0,
+      0
+    ],
+    "Values": [
+      5677420,
+      26214896,
+      0,
+      0
+    ]
+  },
+  {
+    "ID": 11,
+    "GroupID": 2817,
+    "Rare": 0,
+    "Type": 27,
+    "NameID": 40,
+    "Name": "一般",
+    "DescriptionID": 2562,
+    "Description": "萃取數十種的毒物鮮血，並施咒於暗夜烏鴉的骨骸上製成飾品，是巫族的保命符",
+    "Icon": 768,
+    "ItemID": 10,
+    "Effects": [
+      709,
+      0,
+      0,
+      0
+    ],
+    "Values": [
+      6451614,
+      28836336,
+      0,
+      0
+    ]
+  },
+  {
+    "ID": 12,
+    "GroupID": 3073,
+    "Rare": 0,
+    "Type": 0,
+    "NameID": 0,
+    "Name": null,
+    "DescriptionID": 0,
+    "Description": null,
+    "Icon": 0,
+    "ItemID": 0,
+    "Effects": [
+      709,
+      0,
+      0,
+      0
+    ],
+    "Values": [
+      7225808,
+      31457776,
+      0,
+      0
+    ]
+  },
+  {
+    "ID": 13,
+    "GroupID": 3329,
+    "Rare": 0,
+    "Type": 0,
+    "NameID": 0,
+    "Name": null,
+    "DescriptionID": 0,
+    "Description": null,
+    "Icon": 0,
+    "ItemID": 0,
+    "Effects": [
+      709,
+      0,
+      0,
+      0
+    ],
+    "Values": [
+      8000002,
+      34079216,
+      0,
+      0
+    ]
+  },
+  {
+    "ID": 14,
+    "GroupID": 3585,
+    "Rare": 0,
+    "Type": 0,
+    "NameID": 0,
+    "Name": null,
+    "DescriptionID": 0,
+    "Description": null,
+    "Icon": 0,
+    "ItemID": 0,
+    "Effects": [
+      709,
+      0,
+      0,
+      0
+    ],
+    "Values": [
+      8774196,
+      36700656,
+      0,
+      0
+    ]
+  },
+  {
+    "ID": 15,
+    "GroupID": 3841,
+    "Rare": 0,
+    "Type": 0,
+    "NameID": 0,
+    "Name": null,
+    "DescriptionID": 0,
+    "Description": null,
+    "Icon": 0,
+    "ItemID": 0,
+    "Effects": [
+      709,
+      0,
+      0,
+      0
+    ],
+    "Values": [
+      9548390,
+      39322096,
+      0,
+      0
+    ]
+  },
+  {
+    "ID": 16,
+    "GroupID": 4097,
+    "Rare": 0,
+    "Type": 27,
+    "NameID": 45,
+    "Name": "x{0}",
+    "DescriptionID": 3842,
+    "Description": "弓兵",
+    "Icon": 768,
+    "ItemID": 15,
+    "Effects": [
+      1091,
+      0,
+      0,
+      0
+    ],
+    "Values": [
+      10529035,
+      41943536,
+      0,
+      0
+    ]
+  },
+  {
+    "ID": 17,
+    "GroupID": 4353,
+    "Rare": 0,
+    "Type": 0,
+    "NameID": 0,
+    "Name": null,
+    "DescriptionID": 0,
+    "Description": null,
+    "Icon": 0,
+    "ItemID": 0,
+    "Effects": [
+      1091,
+      0,
+      0,
+      0
+    ],
+    "Values": [
+      11509680,
+      44564976,
+      0,
+      0
+    ]
+  },
+  {
+    "ID": 18,
+    "GroupID": 4609,
+    "Rare": 0,
+    "Type": 0,
+    "NameID": 0,
+    "Name": null,
+    "DescriptionID": 0,
+    "Description": null,
+    "Icon": 0,
+    "ItemID": 0,
+    "Effects": [
+      1091,
+      0,
+      0,
+      0
+    ],
+    "Values": [
+      12490325,
+      47186416,
+      0,
+      0
+    ]
+  },
+  {
+    "ID": 19,
+    "GroupID": 4865,
+    "Rare": 0,
+    "Type": 0,
+    "NameID": 0,
+    "Name": null,
+    "DescriptionID": 0,
+    "Description": null,
+    "Icon": 0,
+    "ItemID": 0,
+    "Effects": [
+      1091,
+      0,
+      0,
+      0
+    ],
+    "Values": [
+      13470970,
+      49807856,
+      0,
+      0
+    ]
+  },
+  {
+    "ID": 20,
+    "GroupID": 5121,
+    "Rare": 0,
+    "Type": 0,
+    "NameID": 0,
+    "Name": null,
+    "DescriptionID": 0,
+    "Description": null,
+    "Icon": 0,
+    "ItemID": 0,
+    "Effects": [
+      1091,
+      0,
+      0,
+      0
+    ],
+    "Values": [
+      14451615,
+      52429296,
+      0,
+      0
+    ]
+  },
+  {
+    "ID": 21,
+    "GroupID": 5377,
+    "Rare": 0,
+    "Type": 27,
+    "NameID": 50,
+    "Name": "勝利",
+    "DescriptionID": 5122,
+    "Description": "大型箭塔",
+    "Icon": 768,
+    "ItemID": 20,
+    "Effects": [
+      1680,
+      0,
+      0,
+      0
+    ],
+    "Values": [
+      15690325,
+      55050736,
+      0,
+      0
+    ]
+  },
+  {
+    "ID": 22,
+    "GroupID": 5633,
+    "Rare": 0,
+    "Type": 0,
+    "NameID": 0,
+    "Name": null,
+    "DescriptionID": 0,
+    "Description": null,
+    "Icon": 0,
+    "ItemID": 0,
+    "Effects": [
+      1680,
+      0,
+      0,
+      0
+    ],
+    "Values": [
+      16929035,
+      57672176,
+      0,
+      0
+    ]
+  },
+  {
+    "ID": 23,
+    "GroupID": 5889,
+    "Rare": 0,
+    "Type": 0,
+    "NameID": 0,
+    "Name": null,
+    "DescriptionID": 0,
+    "Description": null,
+    "Icon": 0,
+    "ItemID": 0,
+    "Effects": [
+      1680,
+      0,
+      0,
+      0
+    ],
+    "Values": [
+      18167745,
+      60293616,
+      0,
+      0
+    ]
+  },
+  {
+    "ID": 24,
+    "GroupID": 6145,
+    "Rare": 0,
+    "Type": 0,
+    "NameID": 0,
+    "Name": null,
+    "DescriptionID": 0,
+    "Description": null,
+    "Icon": 0,
+    "ItemID": 0,
+    "Effects": [
+      1680,
+      0,
+      0,
+      0
+    ],
+    "Values": [
+      19406455,
+      62915056,
+      0,
+      0
+    ]
+  },
+  {
+    "ID": 25,
+    "GroupID": 6401,
+    "Rare": 0,
+    "Type": 0,
+    "NameID": 0,
+    "Name": null,
+    "DescriptionID": 0,
+    "Description": null,
+    "Icon": 0,
+    "ItemID": 0,
+    "Effects": [
+      1680,
+      0,
+      0,
+      0
+    ],
+    "Values": [
+      20645165,
+      65536496,
+      0,
+      0
+    ]
+  },
+  {
+    "ID": 26,
+    "GroupID": 6657,
+    "Rare": 0,
+    "Type": 27,
+    "NameID": 55,
+    "Name": "Exp+{0}",
+    "DescriptionID": 6402,
+    "Description": "獨眼巨人",
+    "Icon": 768,
+    "ItemID": 25,
+    "Effects": [
+      1846,
+      0,
+      114,
+      0
+    ],
+    "Values": [
+      22193552,
+      68157936,
+      0,
+      0
+    ]
+  },
+  {
+    "ID": 27,
+    "GroupID": 6913,
+    "Rare": 0,
+    "Type": 0,
+    "NameID": 0,
+    "Name": null,
+    "DescriptionID": 0,
+    "Description": null,
+    "Icon": 0,
+    "ItemID": 0,
+    "Effects": [
+      1846,
+      0,
+      114,
+      0
+    ],
+    "Values": [
+      23741939,
+      70779376,
+      0,
+      0
+    ]
+  },
+  {
+    "ID": 28,
+    "GroupID": 7169,
+    "Rare": 0,
+    "Type": 0,
+    "NameID": 0,
+    "Name": null,
+    "DescriptionID": 0,
+    "Description": null,
+    "Icon": 0,
+    "ItemID": 0,
+    "Effects": [
+      1846,
+      0,
+      114,
+      0
+    ],
+    "Values": [
+      25290326,
+      73400816,
+      0,
+      0
+    ]
+  },
+  {
+    "ID": 29,
+    "GroupID": 7425,
+    "Rare": 0,
+    "Type": 0,
+    "NameID": 0,
+    "Name": null,
+    "DescriptionID": 0,
+    "Description": null,
+    "Icon": 0,
+    "ItemID": 0,
+    "Effects": [
+      1846,
+      0,
+      114,
+      0
+    ],
+    "Values": [
+      26838713,
+      76022256,
+      0,
+      0
+    ]
+  },
+  {
+    "ID": 30,
+    "GroupID": 7681,
+    "Rare": 0,
+    "Type": 0,
+    "NameID": 0,
+    "Name": null,
+    "DescriptionID": 0,
+    "Description": null,
+    "Icon": 0,
+    "ItemID": 0,
+    "Effects": [
+      1846,
+      0,
+      114,
+      0
+    ],
+    "Values": [
+      28387100,
+      78643696,
+      0,
+      0
+    ]
+  },
+  {
+    "ID": 51,
+    "GroupID": 258,
+    "Rare": 0,
+    "Type": 27,
+    "NameID": 30,
+    "Name": "(已滿)",
+    "DescriptionID": 0,
+    "Description": null,
+    "Icon": 0,
+    "ItemID": 0,
+    "Effects": [
+      299,
+      0,
+      0,
+      0
+    ],
+    "Values": [
+      516129,
+      2621938,
+      0,
+      0
+    ]
+  },
+  {
+    "ID": 52,
+    "GroupID": 514,
+    "Rare": 0,
+    "Type": 0,
+    "NameID": 0,
+    "Name": null,
+    "DescriptionID": 0,
+    "Description": null,
+    "Icon": 0,
+    "ItemID": 0,
+    "Effects": [
+      299,
+      0,
+      0,
+      0
+    ],
+    "Values": [
+      1032258,
+      5243378,
+      0,
+      0
+    ]
+  },
+  {
+    "ID": 53,
+    "GroupID": 770,
+    "Rare": 0,
+    "Type": 0,
+    "NameID": 0,
+    "Name": null,
+    "DescriptionID": 0,
+    "Description": null,
+    "Icon": 0,
+    "ItemID": 0,
+    "Effects": [
+      299,
+      0,
+      0,
+      0
+    ],
+    "Values": [
+      1548387,
+      7864818,
+      0,
+      0
+    ]
+  },
+  {
+    "ID": 54,
+    "GroupID": 1026,
+    "Rare": 0,
+    "Type": 0,
+    "NameID": 0,
+    "Name": null,
+    "DescriptionID": 0,
+    "Description": null,
+    "Icon": 0,
+    "ItemID": 0,
+    "Effects": [
+      299,
+      0,
+      0,
+      0
+    ],
+    "Values": [
+      2064516,
+      10486258,
+      0,
+      0
+    ]
+  },
+  {
+    "ID": 55,
+    "GroupID": 1282,
+    "Rare": 0,
+    "Type": 0,
+    "NameID": 0,
+    "Name": null,
+    "DescriptionID": 0,
+    "Description": null,
+    "Icon": 0,
+    "ItemID": 0,
+    "Effects": [
+      299,
+      0,
+      0,
+      0
+    ],
+    "Values": [
+      2580645,
+      13107698,
+      0,
+      0
+    ]
+  },
+  {
+    "ID": 56,
+    "GroupID": 1538,
+    "Rare": 0,
+    "Type": 27,
+    "NameID": 35,
+    "Name": "你還可以選擇更多英雄，確定要繼續嗎？",
+    "DescriptionID": 1281,
+    "Description": "落腳之地",
+    "Icon": 768,
+    "ItemID": 5,
+    "Effects": [
+      460,
+      0,
+      0,
+      0
+    ],
+    "Values": [
+      3200000,
+      15729138,
+      0,
+      0
+    ]
+  },
+  {
+    "ID": 57,
+    "GroupID": 1794,
+    "Rare": 0,
+    "Type": 0,
+    "NameID": 0,
+    "Name": null,
+    "DescriptionID": 0,
+    "Description": null,
+    "Icon": 0,
+    "ItemID": 0,
+    "Effects": [
+      460,
+      0,
+      0,
+      0
+    ],
+    "Values": [
+      3819355,
+      18350578,
+      0,
+      0
+    ]
+  },
+  {
+    "ID": 58,
+    "GroupID": 2050,
+    "Rare": 0,
+    "Type": 0,
+    "NameID": 0,
+    "Name": null,
+    "DescriptionID": 0,
+    "Description": null,
+    "Icon": 0,
+    "ItemID": 0,
+    "Effects": [
+      460,
+      0,
+      0,
+      0
+    ],
+    "Values": [
+      4438710,
+      20972018,
+      0,
+      0
+    ]
+  },
+  {
+    "ID": 59,
+    "GroupID": 2306,
+    "Rare": 0,
+    "Type": 0,
+    "NameID": 0,
+    "Name": null,
+    "DescriptionID": 0,
+    "Description": null,
+    "Icon": 0,
+    "ItemID": 0,
+    "Effects": [
+      460,
+      0,
+      0,
+      0
+    ],
+    "Values": [
+      5058065,
+      23593458,
+      0,
+      0
+    ]
+  },
+  {
+    "ID": 60,
+    "GroupID": 2562,
+    "Rare": 0,
+    "Type": 0,
+    "NameID": 0,
+    "Name": null,
+    "DescriptionID": 0,
+    "Description": null,
+    "Icon": 0,
+    "ItemID": 0,
+    "Effects": [
+      460,
+      0,
+      0,
+      0
+    ],
+    "Values": [
+      5677420,
+      26214898,
+      0,
+      0
+    ]
+  },
+  {
+    "ID": 61,
+    "GroupID": 2818,
+    "Rare": 0,
+    "Type": 27,
+    "NameID": 40,
+    "Name": "一般",
+    "DescriptionID": 2561,
+    "Description": "配戴此腰帶，可幻化成夢魔徘徊在黑暗之中，吸食著他人的美夢以提升精神力",
+    "Icon": 768,
+    "ItemID": 10,
+    "Effects": [
+      709,
+      0,
+      0,
+      0
+    ],
+    "Values": [
+      6451614,
+      28836338,
+      0,
+      0
+    ]
+  },
+  {
+    "ID": 62,
+    "GroupID": 3074,
+    "Rare": 0,
+    "Type": 0,
+    "NameID": 0,
+    "Name": null,
+    "DescriptionID": 0,
+    "Description": null,
+    "Icon": 0,
+    "ItemID": 0,
+    "Effects": [
+      709,
+      0,
+      0,
+      0
+    ],
+    "Values": [
+      7225808,
+      31457778,
+      0,
+      0
+    ]
+  },
+  {
+    "ID": 63,
+    "GroupID": 3330,
+    "Rare": 0,
+    "Type": 0,
+    "NameID": 0,
+    "Name": null,
+    "DescriptionID": 0,
+    "Description": null,
+    "Icon": 0,
+    "ItemID": 0,
+    "Effects": [
+      709,
+      0,
+      0,
+      0
+    ],
+    "Values": [
+      8000002,
+      34079218,
+      0,
+      0
+    ]
+  },
+  {
+    "ID": 64,
+    "GroupID": 3586,
+    "Rare": 0,
+    "Type": 0,
+    "NameID": 0,
+    "Name": null,
+    "DescriptionID": 0,
+    "Description": null,
+    "Icon": 0,
+    "ItemID": 0,
+    "Effects": [
+      709,
+      0,
+      0,
+      0
+    ],
+    "Values": [
+      8774196,
+      36700658,
+      0,
+      0
+    ]
+  },
+  {
+    "ID": 65,
+    "GroupID": 3842,
+    "Rare": 0,
+    "Type": 0,
+    "NameID": 0,
+    "Name": null,
+    "DescriptionID": 0,
+    "Description": null,
+    "Icon": 0,
+    "ItemID": 0,
+    "Effects": [
+      709,
+      0,
+      0,
+      0
+    ],
+    "Values": [
+      9548390,
+      39322098,
+      0,
+      0
+    ]
+  },
+  {
+    "ID": 66,
+    "GroupID": 4098,
+    "Rare": 0,
+    "Type": 27,
+    "NameID": 45,
+    "Name": "x{0}",
+    "DescriptionID": 3841,
+    "Description": "步兵",
+    "Icon": 768,
+    "ItemID": 15,
+    "Effects": [
+      1091,
+      0,
+      0,
+      0
+    ],
+    "Values": [
+      10529035,
+      41943538,
+      0,
+      0
+    ]
+  },
+  {
+    "ID": 67,
+    "GroupID": 4354,
+    "Rare": 0,
+    "Type": 0,
+    "NameID": 0,
+    "Name": null,
+    "DescriptionID": 0,
+    "Description": null,
+    "Icon": 0,
+    "ItemID": 0,
+    "Effects": [
+      1091,
+      0,
+      0,
+      0
+    ],
+    "Values": [
+      11509680,
+      44564978,
+      0,
+      0
+    ]
+  },
+  {
+    "ID": 68,
+    "GroupID": 4610,
+    "Rare": 0,
+    "Type": 0,
+    "NameID": 0,
+    "Name": null,
+    "DescriptionID": 0,
+    "Description": null,
+    "Icon": 0,
+    "ItemID": 0,
+    "Effects": [
+      1091,
+      0,
+      0,
+      0
+    ],
+    "Values": [
+      12490325,
+      47186418,
+      0,
+      0
+    ]
+  },
+  {
+    "ID": 69,
+    "GroupID": 4866,
+    "Rare": 0,
+    "Type": 0,
+    "NameID": 0,
+    "Name": null,
+    "DescriptionID": 0,
+    "Description": null,
+    "Icon": 0,
+    "ItemID": 0,
+    "Effects": [
+      1091,
+      0,
+      0,
+      0
+    ],
+    "Values": [
+      13470970,
+      49807858,
+      0,
+      0
+    ]
+  },
+  {
+    "ID": 70,
+    "GroupID": 5122,
+    "Rare": 0,
+    "Type": 0,
+    "NameID": 0,
+    "Name": null,
+    "DescriptionID": 0,
+    "Description": null,
+    "Icon": 0,
+    "ItemID": 0,
+    "Effects": [
+      1091,
+      0,
+      0,
+      0
+    ],
+    "Values": [
+      14451615,
+      52429298,
+      0,
+      0
+    ]
+  },
+  {
+    "ID": 71,
+    "GroupID": 5378,
+    "Rare": 0,
+    "Type": 27,
+    "NameID": 50,
+    "Name": "勝利",
+    "DescriptionID": 5121,
+    "Description": "防禦箭塔",
+    "Icon": 768,
+    "ItemID": 20,
+    "Effects": [
+      1680,
+      0,
+      0,
+      0
+    ],
+    "Values": [
+      15690325,
+      55050738,
+      0,
+      0
+    ]
+  },
+  {
+    "ID": 72,
+    "GroupID": 5634,
+    "Rare": 0,
+    "Type": 0,
+    "NameID": 0,
+    "Name": null,
+    "DescriptionID": 0,
+    "Description": null,
+    "Icon": 0,
+    "ItemID": 0,
+    "Effects": [
+      1680,
+      0,
+      0,
+      0
+    ],
+    "Values": [
+      16929035,
+      57672178,
+      0,
+      0
+    ]
+  },
+  {
+    "ID": 73,
+    "GroupID": 5890,
+    "Rare": 0,
+    "Type": 0,
+    "NameID": 0,
+    "Name": null,
+    "DescriptionID": 0,
+    "Description": null,
+    "Icon": 0,
+    "ItemID": 0,
+    "Effects": [
+      1680,
+      0,
+      0,
+      0
+    ],
+    "Values": [
+      18167745,
+      60293618,
+      0,
+      0
+    ]
+  },
+  {
+    "ID": 74,
+    "GroupID": 6146,
+    "Rare": 0,
+    "Type": 0,
+    "NameID": 0,
+    "Name": null,
+    "DescriptionID": 0,
+    "Description": null,
+    "Icon": 0,
+    "ItemID": 0,
+    "Effects": [
+      1680,
+      0,
+      0,
+      0
+    ],
+    "Values": [
+      19406455,
+      62915058,
+      0,
+      0
+    ]
+  },
+  {
+    "ID": 75,
+    "GroupID": 6402,
+    "Rare": 0,
+    "Type": 0,
+    "NameID": 0,
+    "Name": null,
+    "DescriptionID": 0,
+    "Description": null,
+    "Icon": 0,
+    "ItemID": 0,
+    "Effects": [
+      1680,
+      0,
+      0,
+      0
+    ],
+    "Values": [
+      20645165,
+      65536498,
+      0,
+      0
+    ]
+  },
+  {
+    "ID": 76,
+    "GroupID": 6658,
+    "Rare": 0,
+    "Type": 27,
+    "NameID": 55,
+    "Name": "Exp+{0}",
+    "DescriptionID": 6401,
+    "Description": "冰霜翼龍",
+    "Icon": 768,
+    "ItemID": 25,
+    "Effects": [
+      1846,
+      0,
+      114,
+      0
+    ],
+    "Values": [
+      22193552,
+      68157938,
+      0,
+      0
+    ]
+  },
+  {
+    "ID": 77,
+    "GroupID": 6914,
+    "Rare": 0,
+    "Type": 0,
+    "NameID": 0,
+    "Name": null,
+    "DescriptionID": 0,
+    "Description": null,
+    "Icon": 0,
+    "ItemID": 0,
+    "Effects": [
+      1846,
+      0,
+      114,
+      0
+    ],
+    "Values": [
+      23741939,
+      70779378,
+      0,
+      0
+    ]
+  },
+  {
+    "ID": 78,
+    "GroupID": 7170,
+    "Rare": 0,
+    "Type": 0,
+    "NameID": 0,
+    "Name": null,
+    "DescriptionID": 0,
+    "Description": null,
+    "Icon": 0,
+    "ItemID": 0,
+    "Effects": [
+      1846,
+      0,
+      114,
+      0
+    ],
+    "Values": [
+      25290326,
+      73400818,
+      0,
+      0
+    ]
+  },
+  {
+    "ID": 79,
+    "GroupID": 7426,
+    "Rare": 0,
+    "Type": 0,
+    "NameID": 0,
+    "Name": null,
+    "DescriptionID": 0,
+    "Description": null,
+    "Icon": 0,
+    "ItemID": 0,
+    "Effects": [
+      1846,
+      0,
+      114,
+      0
+    ],
+    "Values": [
+      26838713,
+      76022258,
+      0,
+      0
+    ]
+  },
+  {
+    "ID": 80,
+    "GroupID": 7682,
+    "Rare": 0,
+    "Type": 0,
+    "NameID": 0,
+    "Name": null,
+    "DescriptionID": 0,
+    "Description": null,
+    "Icon": 0,
+    "ItemID": 0,
+    "Effects": [
+      1846,
+      0,
+      114,
+      0
+    ],
+    "Values": [
+      28387100,
+      78643698,
+      0,
+      0
+    ]
+  },
+  {
+    "ID": 101,
+    "GroupID": 259,
+    "Rare": 0,
+    "Type": 27,
+    "NameID": 30,
+    "Name": "(已滿)",
+    "DescriptionID": 0,
+    "Description": null,
+    "Icon": 0,
+    "ItemID": 0,
+    "Effects": [
+      299,
+      0,
+      0,
+      0
+    ],
+    "Values": [
+      516129,
+      2621937,
+      0,
+      0
+    ]
+  },
+  {
+    "ID": 102,
+    "GroupID": 515,
+    "Rare": 0,
+    "Type": 0,
+    "NameID": 0,
+    "Name": null,
+    "DescriptionID": 0,
+    "Description": null,
+    "Icon": 0,
+    "ItemID": 0,
+    "Effects": [
+      299,
+      0,
+      0,
+      0
+    ],
+    "Values": [
+      1032258,
+      5243377,
+      0,
+      0
+    ]
+  },
+  {
+    "ID": 103,
+    "GroupID": 771,
+    "Rare": 0,
+    "Type": 0,
+    "NameID": 0,
+    "Name": null,
+    "DescriptionID": 0,
+    "Description": null,
+    "Icon": 0,
+    "ItemID": 0,
+    "Effects": [
+      299,
+      0,
+      0,
+      0
+    ],
+    "Values": [
+      1548387,
+      7864817,
+      0,
+      0
+    ]
+  },
+  {
+    "ID": 104,
+    "GroupID": 1027,
+    "Rare": 0,
+    "Type": 0,
+    "NameID": 0,
+    "Name": null,
+    "DescriptionID": 0,
+    "Description": null,
+    "Icon": 0,
+    "ItemID": 0,
+    "Effects": [
+      299,
+      0,
+      0,
+      0
+    ],
+    "Values": [
+      2064516,
+      10486257,
+      0,
+      0
+    ]
+  },
+  {
+    "ID": 105,
+    "GroupID": 1283,
+    "Rare": 0,
+    "Type": 0,
+    "NameID": 0,
+    "Name": null,
+    "DescriptionID": 0,
+    "Description": null,
+    "Icon": 0,
+    "ItemID": 0,
+    "Effects": [
+      299,
+      0,
+      0,
+      0
+    ],
+    "Values": [
+      2580645,
+      13107697,
+      0,
+      0
+    ]
+  },
+  {
+    "ID": 106,
+    "GroupID": 1539,
+    "Rare": 0,
+    "Type": 27,
+    "NameID": 35,
+    "Name": "你還可以選擇更多英雄，確定要繼續嗎？",
+    "DescriptionID": 1282,
+    "Description": "驅逐",
+    "Icon": 256,
+    "ItemID": 5,
+    "Effects": [
+      460,
+      0,
+      0,
+      0
+    ],
+    "Values": [
+      3200000,
+      15729137,
+      0,
+      0
+    ]
+  },
+  {
+    "ID": 107,
+    "GroupID": 1795,
+    "Rare": 0,
+    "Type": 0,
+    "NameID": 0,
+    "Name": null,
+    "DescriptionID": 0,
+    "Description": null,
+    "Icon": 0,
+    "ItemID": 0,
+    "Effects": [
+      460,
+      0,
+      0,
+      0
+    ],
+    "Values": [
+      3819355,
+      18350577,
+      0,
+      0
+    ]
+  },
+  {
+    "ID": 108,
+    "GroupID": 2051,
+    "Rare": 0,
+    "Type": 0,
+    "NameID": 0,
+    "Name": null,
+    "DescriptionID": 0,
+    "Description": null,
+    "Icon": 0,
+    "ItemID": 0,
+    "Effects": [
+      460,
+      0,
+      0,
+      0
+    ],
+    "Values": [
+      4438710,
+      20972017,
+      0,
+      0
+    ]
+  },
+  {
+    "ID": 109,
+    "GroupID": 2307,
+    "Rare": 0,
+    "Type": 0,
+    "NameID": 0,
+    "Name": null,
+    "DescriptionID": 0,
+    "Description": null,
+    "Icon": 0,
+    "ItemID": 0,
+    "Effects": [
+      460,
+      0,
+      0,
+      0
+    ],
+    "Values": [
+      5058065,
+      23593457,
+      0,
+      0
+    ]
+  },
+  {
+    "ID": 110,
+    "GroupID": 2563,
+    "Rare": 0,
+    "Type": 0,
+    "NameID": 0,
+    "Name": null,
+    "DescriptionID": 0,
+    "Description": null,
+    "Icon": 0,
+    "ItemID": 0,
+    "Effects": [
+      460,
+      0,
+      0,
+      0
+    ],
+    "Values": [
+      5677420,
+      26214897,
+      0,
+      0
+    ]
+  },
+  {
+    "ID": 111,
+    "GroupID": 2819,
+    "Rare": 0,
+    "Type": 27,
+    "NameID": 40,
+    "Name": "一般",
+    "DescriptionID": 2562,
+    "Description": "萃取數十種的毒物鮮血，並施咒於暗夜烏鴉的骨骸上製成飾品，是巫族的保命符",
+    "Icon": 256,
+    "ItemID": 10,
+    "Effects": [
+      709,
+      0,
+      0,
+      0
+    ],
+    "Values": [
+      6451614,
+      28836337,
+      0,
+      0
+    ]
+  },
+  {
+    "ID": 112,
+    "GroupID": 3075,
+    "Rare": 0,
+    "Type": 0,
+    "NameID": 0,
+    "Name": null,
+    "DescriptionID": 0,
+    "Description": null,
+    "Icon": 0,
+    "ItemID": 0,
+    "Effects": [
+      709,
+      0,
+      0,
+      0
+    ],
+    "Values": [
+      7225808,
+      31457777,
+      0,
+      0
+    ]
+  },
+  {
+    "ID": 113,
+    "GroupID": 3331,
+    "Rare": 0,
+    "Type": 0,
+    "NameID": 0,
+    "Name": null,
+    "DescriptionID": 0,
+    "Description": null,
+    "Icon": 0,
+    "ItemID": 0,
+    "Effects": [
+      709,
+      0,
+      0,
+      0
+    ],
+    "Values": [
+      8000002,
+      34079217,
+      0,
+      0
+    ]
+  },
+  {
+    "ID": 114,
+    "GroupID": 3587,
+    "Rare": 0,
+    "Type": 0,
+    "NameID": 0,
+    "Name": null,
+    "DescriptionID": 0,
+    "Description": null,
+    "Icon": 0,
+    "ItemID": 0,
+    "Effects": [
+      709,
+      0,
+      0,
+      0
+    ],
+    "Values": [
+      8774196,
+      36700657,
+      0,
+      0
+    ]
+  },
+  {
+    "ID": 115,
+    "GroupID": 3843,
+    "Rare": 0,
+    "Type": 0,
+    "NameID": 0,
+    "Name": null,
+    "DescriptionID": 0,
+    "Description": null,
+    "Icon": 0,
+    "ItemID": 0,
+    "Effects": [
+      709,
+      0,
+      0,
+      0
+    ],
+    "Values": [
+      9548390,
+      39322097,
+      0,
+      0
+    ]
+  },
+  {
+    "ID": 116,
+    "GroupID": 4099,
+    "Rare": 0,
+    "Type": 27,
+    "NameID": 45,
+    "Name": "x{0}",
+    "DescriptionID": 3842,
+    "Description": "弓兵",
+    "Icon": 256,
+    "ItemID": 15,
+    "Effects": [
+      1091,
+      0,
+      0,
+      0
+    ],
+    "Values": [
+      10529035,
+      41943537,
+      0,
+      0
+    ]
+  },
+  {
+    "ID": 117,
+    "GroupID": 4355,
+    "Rare": 0,
+    "Type": 0,
+    "NameID": 0,
+    "Name": null,
+    "DescriptionID": 0,
+    "Description": null,
+    "Icon": 0,
+    "ItemID": 0,
+    "Effects": [
+      1091,
+      0,
+      0,
+      0
+    ],
+    "Values": [
+      11509680,
+      44564977,
+      0,
+      0
+    ]
+  },
+  {
+    "ID": 118,
+    "GroupID": 4611,
+    "Rare": 0,
+    "Type": 0,
+    "NameID": 0,
+    "Name": null,
+    "DescriptionID": 0,
+    "Description": null,
+    "Icon": 0,
+    "ItemID": 0,
+    "Effects": [
+      1091,
+      0,
+      0,
+      0
+    ],
+    "Values": [
+      12490325,
+      47186417,
+      0,
+      0
+    ]
+  },
+  {
+    "ID": 119,
+    "GroupID": 4867,
+    "Rare": 0,
+    "Type": 0,
+    "NameID": 0,
+    "Name": null,
+    "DescriptionID": 0,
+    "Description": null,
+    "Icon": 0,
+    "ItemID": 0,
+    "Effects": [
+      1091,
+      0,
+      0,
+      0
+    ],
+    "Values": [
+      13470970,
+      49807857,
+      0,
+      0
+    ]
+  },
+  {
+    "ID": 120,
+    "GroupID": 5123,
+    "Rare": 0,
+    "Type": 0,
+    "NameID": 0,
+    "Name": null,
+    "DescriptionID": 0,
+    "Description": null,
+    "Icon": 0,
+    "ItemID": 0,
+    "Effects": [
+      1091,
+      0,
+      0,
+      0
+    ],
+    "Values": [
+      14451615,
+      52429297,
+      0,
+      0
+    ]
+  },
+  {
+    "ID": 121,
+    "GroupID": 5379,
+    "Rare": 0,
+    "Type": 27,
+    "NameID": 50,
+    "Name": "勝利",
+    "DescriptionID": 5122,
+    "Description": "大型箭塔",
+    "Icon": 256,
+    "ItemID": 20,
+    "Effects": [
+      1680,
+      0,
+      0,
+      0
+    ],
+    "Values": [
+      15690325,
+      55050737,
+      0,
+      0
+    ]
+  },
+  {
+    "ID": 122,
+    "GroupID": 5635,
+    "Rare": 0,
+    "Type": 0,
+    "NameID": 0,
+    "Name": null,
+    "DescriptionID": 0,
+    "Description": null,
+    "Icon": 0,
+    "ItemID": 0,
+    "Effects": [
+      1680,
+      0,
+      0,
+      0
+    ],
+    "Values": [
+      16929035,
+      57672177,
+      0,
+      0
+    ]
+  },
+  {
+    "ID": 123,
+    "GroupID": 5891,
+    "Rare": 0,
+    "Type": 0,
+    "NameID": 0,
+    "Name": null,
+    "DescriptionID": 0,
+    "Description": null,
+    "Icon": 0,
+    "ItemID": 0,
+    "Effects": [
+      1680,
+      0,
+      0,
+      0
+    ],
+    "Values": [
+      18167745,
+      60293617,
+      0,
+      0
+    ]
+  },
+  {
+    "ID": 124,
+    "GroupID": 6147,
+    "Rare": 0,
+    "Type": 0,
+    "NameID": 0,
+    "Name": null,
+    "DescriptionID": 0,
+    "Description": null,
+    "Icon": 0,
+    "ItemID": 0,
+    "Effects": [
+      1680,
+      0,
+      0,
+      0
+    ],
+    "Values": [
+      19406455,
+      62915057,
+      0,
+      0
+    ]
+  },
+  {
+    "ID": 125,
+    "GroupID": 6403,
+    "Rare": 0,
+    "Type": 0,
+    "NameID": 0,
+    "Name": null,
+    "DescriptionID": 0,
+    "Description": null,
+    "Icon": 0,
+    "ItemID": 0,
+    "Effects": [
+      1680,
+      0,
+      0,
+      0
+    ],
+    "Values": [
+      20645165,
+      65536497,
+      0,
+      0
+    ]
+  },
+  {
+    "ID": 126,
+    "GroupID": 6659,
+    "Rare": 0,
+    "Type": 27,
+    "NameID": 55,
+    "Name": "Exp+{0}",
+    "DescriptionID": 6402,
+    "Description": "獨眼巨人",
+    "Icon": 256,
+    "ItemID": 25,
+    "Effects": [
+      1846,
+      0,
+      114,
+      0
+    ],
+    "Values": [
+      22193552,
+      68157937,
+      0,
+      0
+    ]
+  },
+  {
+    "ID": 127,
+    "GroupID": 6915,
+    "Rare": 0,
+    "Type": 0,
+    "NameID": 0,
+    "Name": null,
+    "DescriptionID": 0,
+    "Description": null,
+    "Icon": 0,
+    "ItemID": 0,
+    "Effects": [
+      1846,
+      0,
+      114,
+      0
+    ],
+    "Values": [
+      23741939,
+      70779377,
+      0,
+      0
+    ]
+  },
+  {
+    "ID": 128,
+    "GroupID": 7171,
+    "Rare": 0,
+    "Type": 0,
+    "NameID": 0,
+    "Name": null,
+    "DescriptionID": 0,
+    "Description": null,
+    "Icon": 0,
+    "ItemID": 0,
+    "Effects": [
+      1846,
+      0,
+      114,
+      0
+    ],
+    "Values": [
+      25290326,
+      73400817,
+      0,
+      0
+    ]
+  },
+  {
+    "ID": 129,
+    "GroupID": 7427,
+    "Rare": 0,
+    "Type": 0,
+    "NameID": 0,
+    "Name": null,
+    "DescriptionID": 0,
+    "Description": null,
+    "Icon": 0,
+    "ItemID": 0,
+    "Effects": [
+      1846,
+      0,
+      114,
+      0
+    ],
+    "Values": [
+      26838713,
+      76022257,
+      0,
+      0
+    ]
+  },
+  {
+    "ID": 130,
+    "GroupID": 7683,
+    "Rare": 0,
+    "Type": 0,
+    "NameID": 0,
+    "Name": null,
+    "DescriptionID": 0,
+    "Description": null,
+    "Icon": 0,
+    "ItemID": 0,
+    "Effects": [
+      1846,
+      0,
+      114,
+      0
+    ],
+    "Values": [
+      28387100,
+      78643697,
+      0,
+      0
+    ]
+  }
+]

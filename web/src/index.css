@@ -1,0 +1,72 @@
+:root {
+  --text: #4f4335;
+  --text-h: #241a11;
+  --muted: #6d5a44;
+  --bg: #e8dcc1;
+  --bg-panel: rgba(255, 248, 234, 0.78);
+  --line: rgba(69, 49, 20, 0.16);
+  --accent: #8a5a13;
+  --accent-strong: #b67c1c;
+  --accent-soft: rgba(182, 124, 28, 0.14);
+  --success: #2f6a42;
+  --shadow: 0 24px 60px rgba(88, 58, 17, 0.14);
+  --sans: 'Trebuchet MS', Verdana, sans-serif;
+  --heading: 'Palatino Linotype', 'Book Antiqua', Georgia, serif;
+  --mono: 'Cascadia Code', Consolas, monospace;
+
+  font: 16px/1.55 var(--sans);
+  letter-spacing: 0.01em;
+  color: var(--text);
+  background:
+    radial-gradient(circle at top, rgba(255, 247, 229, 0.7), transparent 35%),
+    linear-gradient(180deg, #f2e8d2 0%, #e5d7b8 52%, #dac59f 100%);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+body,
+button,
+input,
+select {
+  font: inherit;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--heading);
+  color: var(--text-h);
+}
+
+h1 {
+  font-size: clamp(2.6rem, 4vw, 4.5rem);
+  line-height: 0.95;
+}
+
+h2 {
+  font-size: clamp(1.5rem, 2vw, 2rem);
+}
+
+h3,
+p {
+  margin: 0;
+}
