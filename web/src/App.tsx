@@ -671,8 +671,6 @@ function App() {
   const numericResearchSpeed = Number(researchSpeedBonus) || 0
   const researchTimeFactor = 1 / (1 + Math.max(numericResearchSpeed, 0) / 100)
   const selectedTech = techs.find((tech) => tech.id === selectedTechId) ?? visibleTechs[0] ?? null
-  const plannerReadyTechCount = techs.filter((tech) => isPlannerSupported(tech)).length
-  const catalogOnlyTechCount = techs.filter((tech) => tech.dataStatus === 'supplemental-only' && !isPlannerSupported(tech)).length
 
   let plannedTechCount = 0
   let plannedLevelCount = 0
@@ -765,7 +763,6 @@ function App() {
     <div className="planner-shell">
       <header className="panel planner-header">
         <div className="planner-title-block">
-          <p className="eyebrow">{t('planner.eyebrow')}</p>
           <h1>{t('app.title')}</h1>
           <p className="subtitle">{t('app.subtitle')}</p>
         </div>
@@ -890,8 +887,6 @@ function App() {
                 <p className="empty-state">{t('planner.kindEmpty')}</p>
               ) : (
                 <>
-                  <p className="tech-tree-note">{t('planner.treeBoardNote')}</p>
-
                   <div className="tech-tree-scroll">
                     <div
                       className="tech-tree-board"
@@ -927,7 +922,7 @@ function App() {
                             width: `${Math.max(row.cards.length, 1) * treeNodeCellWidth}px`,
                           }}
                         >
-                          {row.cards.map(({ tech, sameKindParents, treeNode }) => {
+                            {row.cards.map(({ tech, sameKindParents }) => {
                               const currentLevel = getCurrentLevel(tech)
                               const targetLevel = getTargetLevel(tech, currentLevel)
                               const label = resolveGameText(gameString, tech.nameKey, tech.name)
@@ -942,22 +937,11 @@ function App() {
                                   <div className="tech-card__title">
                                     <div>
                                       <h3>{label}</h3>
-                                      <p>{t('planner.treeNodeLabel', { id: tech.treeNodeId })}</p>
                                     </div>
                                     <span className={`status-pill ${plannerSupported ? 'status-pill--muted' : 'status-pill--warning'}`}>
                                       {plannerSupported ? `Lv.${tech.maxLevel}` : t('planner.catalogOnlyBadge')}
                                     </span>
                                   </div>
-
-                                  {treeNode ? (
-                                    <p className="tech-card__tree-meta">
-                                      {t('planner.treeMeta', {
-                                        column: treeNode.column,
-                                        group: treeNode.groupCode,
-                                        variant: treeNode.variantCode,
-                                      })}
-                                    </p>
-                                  ) : null}
 
                                   {sameKindParents.length > 0 ? (
                                     <ul className="tech-card__dependency-list">
@@ -1045,8 +1029,6 @@ function App() {
             </div>
           </div>
 
-          <p className="overview-note">{t('planner.totalGamePagePowerNote')}</p>
-
           <dl className="resource-list">
             <div><dt>{t('planner.resource.food')}</dt><dd>{formatCount(locale, totalFood)}</dd></div>
             <div><dt>{t('planner.resource.stone')}</dt><dd>{formatCount(locale, totalStone)}</dd></div>
@@ -1120,7 +1102,6 @@ function App() {
             ) : !isPlannerSupported(selectedTech) ? (
               <div className="selected-tech-panel">
                 <h3>{resolveGameText(gameString, selectedTech.nameKey, selectedTech.name)}</h3>
-                <p>{t('planner.treeNodeLabel', { id: selectedTech.treeNodeId })}</p>
                 <p className="empty-state">
                   {selectedTech.supplementalLevelCount > 0
                     ? t('planner.catalogOnlyDetail', { count: selectedTech.supplementalLevelCount })
@@ -1130,7 +1111,6 @@ function App() {
             ) : (
               <div className="selected-tech-panel">
                 <h3>{resolveGameText(gameString, selectedTech.nameKey, selectedTech.name)}</h3>
-                <p>{t('planner.treeNodeLabel', { id: selectedTech.treeNodeId })}</p>
 
                 <div className="level-detail-list">
                   {selectedTech.levels.map((level) => {
@@ -1187,17 +1167,6 @@ function App() {
                 </div>
               </div>
             )}
-          </div>
-
-          <div className="detail-block">
-            <p className="probe-label">{t('planner.dataHealth')}</p>
-            <ul className="tag-list">
-              <li>{t('planner.metric.treeNodes', { count: treeNodes.length })}</li>
-              <li>{t('planner.metric.datasetVersion', { version: dataset?.version ?? '--' })}</li>
-              <li>{t('planner.metric.plannerReadyTechs', { count: plannerReadyTechCount })}</li>
-              <li>{t('planner.metric.catalogOnlyTechs', { count: catalogOnlyTechCount })}</li>
-              {dataset?.catalog ? <li>{t('planner.metric.catalogTables', { value: `${dataset.catalog.kindTable} / ${dataset.catalog.techTable} / ${dataset.catalog.treeTable}` })}</li> : null}
-            </ul>
           </div>
         </aside>
       </main>
