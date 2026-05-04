@@ -289,6 +289,28 @@ function isPlannerSupported(tech: TechEntry) {
   return tech.plannerSupported && tech.levels.length > 0
 }
 
+function getStoredCurrentLevel(levelMap: Record<number, number>, tech: TechEntry) {
+  if (!isPlannerSupported(tech)) {
+    return 0
+  }
+
+  const value = levelMap[tech.id] ?? 0
+  return Math.min(Math.max(value, 0), tech.maxLevel)
+}
+
+function getStoredTargetLevel(levelMap: Record<number, number>, tech: TechEntry, currentLevel: number) {
+  if (!isPlannerSupported(tech)) {
+    return 0
+  }
+
+  const rawTarget = levelMap[tech.id]
+  if (rawTarget === undefined) {
+    return currentLevel
+  }
+
+  return Math.min(Math.max(rawTarget, currentLevel), tech.maxLevel)
+}
+
 function getUnlockLevel(tech: TechEntry) {
   return tech.levels.reduce<TechLevel | null>((lowestLevel, candidate) => {
     if (!lowestLevel || candidate.level < lowestLevel.level) {
@@ -403,6 +425,7 @@ function App() {
   const kinds = dataset?.kinds ?? []
   const techs = dataset?.techs ?? []
   const treeNodes = dataset?.treeNodes ?? []
+  const techById = new Map(techs.map((tech) => [tech.id, tech]))
   const effectById = new Map(effects.map((effect) => [effect.ID, effect]))
   const decodedTreeNodeById = new Map(treeNodes.map((node) => [node.id, decodeTreeNode(node.rawBytesHex, node.id)]))
 
@@ -610,25 +633,107 @@ function App() {
   }, [selectedTechId, visibleTechs])
 
   function getCurrentLevel(tech: TechEntry) {
-    if (!isPlannerSupported(tech)) {
-      return 0
-    }
-
-    const value = currentLevels[tech.id] ?? 0
-    return Math.min(Math.max(value, 0), tech.maxLevel)
+    return getStoredCurrentLevel(currentLevels, tech)
   }
 
   function getTargetLevel(tech: TechEntry, currentLevel: number) {
+    return getStoredTargetLevel(targetLevels, tech, currentLevel)
+  }
+
+  function applyRequiredCurrentLevels(
+    tech: TechEntry,
+    desiredLevel: number,
+    nextCurrentLevels: Record<number, number>,
+    nextTargetLevels: Record<number, number>,
+    processedRequirementLevelByTechId: Map<number, number>,
+  ) {
     if (!isPlannerSupported(tech)) {
-      return 0
+      return
     }
 
-    const rawTarget = targetLevels[tech.id]
-    if (rawTarget === undefined) {
-      return currentLevel
+    const clampedLevel = Math.min(Math.max(desiredLevel, 0), tech.maxLevel)
+    const previousProcessedLevel = processedRequirementLevelByTechId.get(tech.id) ?? 0
+
+    if (getStoredCurrentLevel(nextCurrentLevels, tech) < clampedLevel) {
+      nextCurrentLevels[tech.id] = clampedLevel
     }
 
-    return Math.min(Math.max(rawTarget, currentLevel), tech.maxLevel)
+    const nextCurrentLevel = getStoredCurrentLevel(nextCurrentLevels, tech)
+    if (getStoredTargetLevel(nextTargetLevels, tech, nextCurrentLevel) < nextCurrentLevel) {
+      nextTargetLevels[tech.id] = nextCurrentLevel
+    }
+
+    if (previousProcessedLevel >= clampedLevel) {
+      return
+    }
+
+    processedRequirementLevelByTechId.set(tech.id, clampedLevel)
+
+    for (const level of tech.levels) {
+      if (level.level <= previousProcessedLevel || level.level > clampedLevel) {
+        continue
+      }
+
+      for (const requirement of level.prerequisites) {
+        const requiredTech = techById.get(requirement.techId)
+        if (!requiredTech || requiredTech.id === tech.id) {
+          continue
+        }
+
+        applyRequiredCurrentLevels(
+          requiredTech,
+          requirement.level,
+          nextCurrentLevels,
+          nextTargetLevels,
+          processedRequirementLevelByTechId,
+        )
+      }
+    }
+  }
+
+  function applyRequiredTargetLevels(
+    tech: TechEntry,
+    desiredLevel: number,
+    nextTargetLevels: Record<number, number>,
+    processedRequirementLevelByTechId: Map<number, number>,
+  ) {
+    if (!isPlannerSupported(tech)) {
+      return
+    }
+
+    const currentLevel = getStoredCurrentLevel(currentLevels, tech)
+    const clampedLevel = Math.min(Math.max(desiredLevel, currentLevel), tech.maxLevel)
+    if (getStoredTargetLevel(nextTargetLevels, tech, currentLevel) < clampedLevel) {
+      nextTargetLevels[tech.id] = clampedLevel
+    }
+
+    const nextTargetLevel = getStoredTargetLevel(nextTargetLevels, tech, currentLevel)
+    const previousProcessedLevel = processedRequirementLevelByTechId.get(tech.id) ?? currentLevel
+    if (previousProcessedLevel >= nextTargetLevel) {
+      return
+    }
+
+    processedRequirementLevelByTechId.set(tech.id, nextTargetLevel)
+
+    for (const level of tech.levels) {
+      if (level.level <= previousProcessedLevel || level.level > nextTargetLevel) {
+        continue
+      }
+
+      for (const requirement of level.prerequisites) {
+        const requiredTech = techById.get(requirement.techId)
+        if (!requiredTech || requiredTech.id === tech.id) {
+          continue
+        }
+
+        applyRequiredTargetLevels(
+          requiredTech,
+          requirement.level,
+          nextTargetLevels,
+          processedRequirementLevelByTechId,
+        )
+      }
+    }
   }
 
   function updateCurrentLevel(tech: TechEntry, nextValue: number) {
@@ -637,10 +742,22 @@ function App() {
     }
 
     const nextCurrent = Math.min(Math.max(nextValue, 0), tech.maxLevel)
-    const nextTarget = Math.max(getTargetLevel(tech, getCurrentLevel(tech)), nextCurrent)
+    const nextCurrentLevels = { ...currentLevels, [tech.id]: nextCurrent }
+    const nextTargetLevels = {
+      ...targetLevels,
+      [tech.id]: Math.max(getTargetLevel(tech, getCurrentLevel(tech)), nextCurrent),
+    }
 
-    setCurrentLevels((prev) => ({ ...prev, [tech.id]: nextCurrent }))
-    setTargetLevels((prev) => ({ ...prev, [tech.id]: nextTarget }))
+    applyRequiredCurrentLevels(
+      tech,
+      nextCurrent,
+      nextCurrentLevels,
+      nextTargetLevels,
+      new Map<number, number>(),
+    )
+
+    setCurrentLevels(nextCurrentLevels)
+    setTargetLevels(nextTargetLevels)
   }
 
   function updateTargetLevel(tech: TechEntry, nextValue: number) {
@@ -650,7 +767,16 @@ function App() {
 
     const currentLevel = getCurrentLevel(tech)
     const nextTarget = Math.min(Math.max(nextValue, currentLevel), tech.maxLevel)
-    setTargetLevels((prev) => ({ ...prev, [tech.id]: nextTarget }))
+    const nextTargetLevels = { ...targetLevels, [tech.id]: nextTarget }
+
+    applyRequiredTargetLevels(
+      tech,
+      nextTarget,
+      nextTargetLevels,
+      new Map<number, number>(),
+    )
+
+    setTargetLevels(nextTargetLevels)
   }
 
   function syncTargetsToCurrent() {
@@ -732,7 +858,7 @@ function App() {
       }
 
       for (const requirement of level.prerequisites) {
-        const requiredTech = techs.find((item) => item.id === requirement.techId)
+        const requiredTech = techById.get(requirement.techId)
         if (!requiredTech) {
           continue
         }
