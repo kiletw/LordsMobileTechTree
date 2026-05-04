@@ -119,6 +119,8 @@ const RESEARCH_SPEED_STORAGE_KEY = 'lmt-research-speed'
 const CURRENT_LEVELS_STORAGE_KEY = 'lmt-current-levels'
 const TARGET_LEVELS_STORAGE_KEY = 'lmt-target-levels'
 const SELECTED_KIND_STORAGE_KEY = 'lmt-selected-kind'
+const ALLIANCE_SHOWDOWN_PERCENT_DIVISOR = 211372
+const SPECIAL_PERCENT_EFFECT_IDS = new Set([216, 217, 218, 511, 512, 513])
 
 function formatCount(locale: string, value?: number | null) {
   if (value === undefined || value === null) {
@@ -207,8 +209,7 @@ function isPercentLikeEffect(effect: EffectEntry | undefined) {
   return (effect.Type === 26 && effect.Target === 17) || (effect.Type === 67 && effect.Target === 39)
 }
 
-function formatScaledPercent(locale: string, rawValue: number) {
-  const scaledValue = rawValue / 100000
+function formatScaledPercent(locale: string, scaledValue: number) {
   const formatter = new Intl.NumberFormat(locale, {
     minimumFractionDigits: scaledValue >= 10 ? 0 : 1,
     maximumFractionDigits: scaledValue >= 10 ? 2 : 2,
@@ -217,12 +218,38 @@ function formatScaledPercent(locale: string, rawValue: number) {
   return `${formatter.format(scaledValue)}%`
 }
 
-function formatEffectDisplayValue(locale: string, rawValue: number, effect: EffectEntry | undefined) {
-  if (isPercentLikeEffect(effect)) {
-    return formatScaledPercent(locale, rawValue)
+function getPercentEffectDivisor(effectId: number, tech: TechEntry | undefined) {
+  if (tech?.kindId === 18 && SPECIAL_PERCENT_EFFECT_IDS.has(effectId)) {
+    return ALLIANCE_SHOWDOWN_PERCENT_DIVISOR
   }
 
-  return formatCount(locale, rawValue)
+  return 100000
+}
+
+function normalizeEffectValue(rawValue: number, effectId: number, effect: EffectEntry | undefined, tech?: TechEntry) {
+  if (isPercentLikeEffect(effect)) {
+    return rawValue / getPercentEffectDivisor(effectId, tech)
+  }
+
+  return rawValue
+}
+
+function formatNormalizedEffectValue(locale: string, value: number, effect: EffectEntry | undefined) {
+  if (isPercentLikeEffect(effect)) {
+    return formatScaledPercent(locale, value)
+  }
+
+  return formatCount(locale, value)
+}
+
+function formatEffectDisplayValue(
+  locale: string,
+  rawValue: number,
+  effectId: number,
+  effect: EffectEntry | undefined,
+  tech?: TechEntry,
+) {
+  return formatNormalizedEffectValue(locale, normalizeEffectValue(rawValue, effectId, effect, tech), effect)
 }
 
 function resolveEffectMeta(
@@ -829,7 +856,9 @@ function App() {
     if (targetEffect && targetEffect.effectId > 0) {
       const delta = targetEffect.effectValue - currentEffectValue
       if (delta !== 0) {
-        effectDeltas.set(targetEffect.effectId, (effectDeltas.get(targetEffect.effectId) ?? 0) + delta)
+        const effectMeta = effectById.get(targetEffect.effectId)
+        const normalizedDelta = normalizeEffectValue(delta, targetEffect.effectId, effectMeta, tech)
+        effectDeltas.set(targetEffect.effectId, (effectDeltas.get(targetEffect.effectId) ?? 0) + normalizedDelta)
       }
     }
 
@@ -1212,7 +1241,7 @@ function App() {
                       const effectMeta = resolveEffectMeta(effectId, effectById, gameString, t)
                       return formatEffectMetricLabel(
                         effectMeta.name,
-                        formatEffectDisplayValue(locale, value, effectMeta.effect),
+                        formatNormalizedEffectValue(locale, value, effectMeta.effect),
                       )
                     })()}
                   </li>
@@ -1257,8 +1286,8 @@ function App() {
                         <p>{t('planner.gamePagePowerLabel', { value: formatCount(locale, getGamePagePowerDelta(selectedTech.levels, level)) })}</p>
                         <p>{t('planner.academyLabel', { value: level.academyLevel })}</p>
                         <p>{effectMeta.name}</p>
-                        <p>{t('planner.effectValueLabel', { value: formatEffectDisplayValue(locale, level.effectValue, effectMeta.effect) })}</p>
-                        <p>{t('planner.effectDeltaLabel', { value: formatEffectDisplayValue(locale, effectDelta, effectMeta.effect) })}</p>
+                        <p>{t('planner.effectValueLabel', { value: formatEffectDisplayValue(locale, level.effectValue, level.effectId, effectMeta.effect, selectedTech) })}</p>
+                        <p>{t('planner.effectDeltaLabel', { value: formatEffectDisplayValue(locale, effectDelta, level.effectId, effectMeta.effect, selectedTech) })}</p>
                         {effectMeta.description ? <p>{effectMeta.description}</p> : null}
                         <p>{t('planner.timeLabel', { value: formatDuration(level.timeSeconds) })}</p>
 
