@@ -7,29 +7,21 @@
  *    - 以 string ID 為 key，每個語言各一份
  */
 
-/** 支援的語言代碼 — 與遊戲的 GameLanguage enum 對齊 */
-export type Locale = 'zh-TW' | 'en' | 'zh-CN' | 'ja' | 'ko' | 'fr' | 'de' | 'es' | 'ru' | 'pt' | 'it' | 'th' | 'vi' | 'id' | 'tr' | 'uk' | 'ms' | 'ar';
+/** 支援的語言代碼 — 與目前可用的遊戲字串資產對齊 */
+export type Locale = 'zh-TW' | 'en' | 'zh-CN' | 'ja' | 'ko' | 'id' | 'tr' | 'uk' | 'ar' | 'pl';
 
 /** 語言對應遊戲的 StringAsset 名稱 */
 export const LocaleToGameAsset: Record<Locale, string> = {
   'en':    'StringEng',
   'zh-TW': 'StringCht',
-  'fr':    'StringFre',
-  'de':    'StringGem',
-  'es':    'StringSpa',
-  'ru':    'StringRus',
   'zh-CN': 'StringChs',
   'id':    'StringIdn',
-  'vi':    'StringVet',
   'tr':    'StringTur',
-  'th':    'StringTha',
-  'it':    'StringIta',
-  'pt':    'StringPot',
   'ko':    'StringKor',
   'ja':    'StringJap',
   'uk':    'StringUkr',
-  'ms':    'StringMys',
   'ar':    'StringArb',
+  'pl':    'StringPol',
 };
 
 /** 語言顯示名稱 (使用該語言本身的名稱) */
@@ -39,19 +31,11 @@ export const LocaleDisplayNames: Record<Locale, string> = {
   'zh-CN': '简体中文',
   'ja':    '日本語',
   'ko':    '한국어',
-  'fr':    'Français',
-  'de':    'Deutsch',
-  'es':    'Español',
-  'ru':    'Русский',
-  'pt':    'Português',
-  'it':    'Italiano',
-  'th':    'ไทย',
-  'vi':    'Tiếng Việt',
   'id':    'Bahasa Indonesia',
   'tr':    'Türkçe',
   'uk':    'Українська',
-  'ms':    'Bahasa Melayu',
   'ar':    'العربية',
+  'pl':    'Polski',
 };
 
 /** UI 翻譯 key 的型別 (強型別提示) */
@@ -69,6 +53,6 @@ export interface I18nContextType {
   gameString: (id: number) => string;
   /** 目前載入的遊戲字串表 */
   gameStrings: Record<string, string>;
-  /** 支援的語言清單 (目前只有有 UI 翻譯的語言) */
+  /** 支援的語言清單 (目前有對應遊戲字串資產的語言) */
   supportedLocales: Locale[];
 }

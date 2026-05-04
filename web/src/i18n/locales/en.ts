@@ -82,6 +82,16 @@ const en: Record<string, string> = {
   'planner.metric.plannerReadyTechs': 'Fully plannable techs: {count}',
   'planner.metric.catalogOnlyTechs': 'Catalog-only special techs: {count}',
   'planner.metric.catalogTables': 'Catalog tables: {value}',
+  'footer.kicker': 'Project',
+  'footer.title': 'Notes and Links',
+  'footer.description': 'This planner is maintained on GitHub, so you can track data updates, review the parsing workflow, and report issues in one place.',
+  'footer.github': 'GitHub Repository',
+  'footer.issues': 'Issues and Feedback',
+  'footer.authorProfile': 'Author Profile',
+  'footer.maintainedBy': 'Maintained by {name}',
+  'footer.dataSource': 'Tech and string data are parsed from game client assets for planning and reference.',
+  'footer.localeCoverage': 'Some UI locales are still being expanded, but supported game strings already switch with the selected locale.',
+  'footer.disclaimer': 'This is an unofficial fan project. Verify critical requirements and costs against the live game before final decisions.',
 
   // === Sides ===
   'side.attacker': 'Attacker',

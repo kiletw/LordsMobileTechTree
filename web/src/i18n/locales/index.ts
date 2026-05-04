@@ -1,2 +1,10 @@
 export { default as zhTW } from './zh-TW';
 export { default as en } from './en';
+export { default as zhCN } from './zh-CN';
+export { default as ja } from './ja';
+export { default as ko } from './ko';
+export { default as id } from './id';
+export { default as tr } from './tr';
+export { default as uk } from './uk';
+export { default as ar } from './ar';
+export { default as pl } from './pl';

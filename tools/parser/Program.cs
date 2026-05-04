@@ -484,8 +484,8 @@ namespace Parser
             ("pt",    "StringPot"),
             ("ko",    "StringKor"),
             ("ja",    "StringJap"),
+            ("pl",    "StringPol"),
             ("uk",    "StringUkr"),
-            ("ms",    "StringMys"),
             ("ar",    "StringArb"),
         };
 
@@ -1097,7 +1097,9 @@ namespace Parser
 
             var techLevels = ParseTable<TechLvTbl>(ResolveTablePath(tablesPath, "TechLv.bytes"));
             var itemNameById = ParseTable<ItemTbl>(ResolveTablePath(tablesPath, "Item.bytes"))
-                .ToDictionary(item => item.EquipKey, item => LookupString(strings, item.EquipName));
+                .ToDictionary(
+                    item => item.EquipKey,
+                    item => (NameKey: item.EquipName, Name: LookupString(strings, item.EquipName)));
             var specialResearchCostByTechLevel = BuildSpecialResearchCostLookup(tablesPath, itemNameById.Keys);
             var supplementalLevelCounts = ParseTable<TechLvSp2RawTbl>(ResolveTablePath(tablesPath, "TechLvSp2.bytes"))
                 .GroupBy(level => level.TechID)
@@ -1306,7 +1308,7 @@ namespace Parser
 
         static object[] BuildSpecialResearchCostExport(
             Dictionary<(ushort TechId, byte Level), (ushort ItemId, ushort Amount, string SourceTable)> specialResearchCostByTechLevel,
-            Dictionary<ushort, string?> itemNameById,
+            Dictionary<ushort, (ushort NameKey, string? Name)> itemNameById,
             ushort techId,
             byte level)
         {
@@ -1315,14 +1317,15 @@ namespace Parser
                 return Array.Empty<object>();
             }
 
-            itemNameById.TryGetValue(specialCost.ItemId, out string? itemName);
+            itemNameById.TryGetValue(specialCost.ItemId, out var itemNameInfo);
 
             return new object[]
             {
                 new
                 {
                     itemId = specialCost.ItemId,
-                    itemName,
+                    itemNameKey = itemNameInfo.NameKey,
+                    itemName = itemNameInfo.Name,
                     amount = specialCost.Amount,
                     sourceTable = specialCost.SourceTable,
                 }

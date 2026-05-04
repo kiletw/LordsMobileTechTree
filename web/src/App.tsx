@@ -16,6 +16,7 @@ type TechRequirement = {
 
 type TechSpecialCost = {
   itemId: number
+  itemNameKey: number
   itemName: string | null
   amount: number
   sourceTable: string
@@ -121,6 +122,9 @@ const TARGET_LEVELS_STORAGE_KEY = 'lmt-target-levels'
 const SELECTED_KIND_STORAGE_KEY = 'lmt-selected-kind'
 const ALLIANCE_SHOWDOWN_PERCENT_DIVISOR = 211372
 const SPECIAL_PERCENT_EFFECT_IDS = new Set([216, 217, 218, 511, 512, 513])
+const PROJECT_REPO_URL = 'https://github.com/kiletw/LordsMobileTechTree'
+const PROJECT_ISSUES_URL = `${PROJECT_REPO_URL}/issues`
+const AUTHOR_PROFILE_URL = 'https://github.com/kiletw'
 
 function formatCount(locale: string, value?: number | null) {
   if (value === undefined || value === null) {
@@ -186,9 +190,17 @@ function resolveGameText(gameString: (id: number) => string, key: number, fallba
   return translated.startsWith('[#') ? (fallback ?? translated) : translated
 }
 
-function resolveSpecialCostName(itemName: string | null, itemId: number, t: (key: string, params?: Record<string, string | number>) => string) {
-  return itemName && itemName.trim().length > 0
-    ? itemName
+function resolveSpecialCostName(
+  gameString: (id: number) => string,
+  itemNameKey: number,
+  itemName: string | null,
+  itemId: number,
+  t: (key: string, params?: Record<string, string | number>) => string,
+) {
+  const translatedName = itemNameKey > 0 ? resolveGameText(gameString, itemNameKey, itemName) : itemName
+
+  return translatedName && translatedName.trim().length > 0
+    ? translatedName
     : t('planner.specialCostFallback', { id: itemId })
 }
 
@@ -837,7 +849,7 @@ function App() {
   let maxAcademyLevel = 0
   const effectDeltas = new Map<number, number>()
   const missingRequirements = new Map<string, string>()
-  const specialCostTotals = new Map<number, { itemId: number; itemName: string | null; amount: number }>()
+  const specialCostTotals = new Map<number, { itemId: number; itemNameKey: number; itemName: string | null; amount: number }>()
 
   for (const tech of techs) {
     if (!isPlannerSupported(tech)) {
@@ -881,6 +893,7 @@ function App() {
         const existingTotal = specialCostTotals.get(specialCost.itemId)
         specialCostTotals.set(specialCost.itemId, {
           itemId: specialCost.itemId,
+          itemNameKey: specialCost.itemNameKey,
           itemName: specialCost.itemName,
           amount: (existingTotal?.amount ?? 0) + specialCost.amount,
         })
@@ -1208,7 +1221,7 @@ function App() {
               <div className="special-cost-list">
                 {specialCostSummary.map((specialCost) => (
                   <article className="special-cost-card" key={specialCost.itemId}>
-                    <span>{resolveSpecialCostName(specialCost.itemName, specialCost.itemId, t)}</span>
+                    <span>{resolveSpecialCostName(gameString, specialCost.itemNameKey, specialCost.itemName, specialCost.itemId, t)}</span>
                     <strong>{formatCount(locale, specialCost.amount)}</strong>
                   </article>
                 ))}
@@ -1296,7 +1309,7 @@ function App() {
                             {level.specialCosts.map((specialCost) => (
                               <li key={`${level.rowId}-special-${specialCost.itemId}`}>
                                 {t('planner.specialCostSummary', {
-                                  name: resolveSpecialCostName(specialCost.itemName, specialCost.itemId, t),
+                                  name: resolveSpecialCostName(gameString, specialCost.itemNameKey, specialCost.itemName, specialCost.itemId, t),
                                   value: formatCount(locale, specialCost.amount),
                                 })}
                               </li>
@@ -1325,6 +1338,35 @@ function App() {
           </div>
         </aside>
       </main>
+
+      <footer className="panel planner-footer">
+        <div className="planner-footer__grid">
+          <section className="planner-footer__intro">
+            <p className="section-kicker">{t('footer.kicker')}</p>
+            <h2>{t('footer.title')}</h2>
+            <p className="overview-note">{t('footer.description')}</p>
+          </section>
+
+          <section className="planner-footer__links" aria-label={t('footer.title')}>
+            <a className="footer-link" href={PROJECT_REPO_URL} target="_blank" rel="noreferrer">
+              {t('footer.github')}
+            </a>
+            <a className="footer-link" href={PROJECT_ISSUES_URL} target="_blank" rel="noreferrer">
+              {t('footer.issues')}
+            </a>
+            <a className="footer-link" href={AUTHOR_PROFILE_URL} target="_blank" rel="noreferrer">
+              {t('footer.authorProfile')}
+            </a>
+          </section>
+
+          <section className="planner-footer__notes">
+            <p className="footer-note footer-note--strong">{t('footer.maintainedBy', { name: 'kiletw' })}</p>
+            <p className="footer-note">{t('footer.dataSource')}</p>
+            <p className="footer-note">{t('footer.localeCoverage')}</p>
+            <p className="footer-note">{t('footer.disclaimer')}</p>
+          </section>
+        </div>
+      </footer>
     </div>
   )
 }

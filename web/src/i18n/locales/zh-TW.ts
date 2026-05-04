@@ -86,6 +86,16 @@ const zhTW = {
   'planner.metric.plannerReadyTechs': '可完整規劃科技: {count}',
   'planner.metric.catalogOnlyTechs': '目錄已收錄待補科技: {count}',
   'planner.metric.catalogTables': '目錄表來源: {value}',
+  'footer.kicker': '專案資訊',
+  'footer.title': '補充說明與連結',
+  'footer.description': '這個規劃器會持續在 GitHub 維護，可直接追資料更新、回報問題，或查看目前的解析流程。',
+  'footer.github': 'GitHub 專案頁',
+  'footer.issues': '問題回報與建議',
+  'footer.authorProfile': '作者頁面',
+  'footer.maintainedBy': '維護者：{name}',
+  'footer.dataSource': '科技與字串資料由遊戲客戶端資產解析而來，主要供規劃與查詢參考。',
+  'footer.localeCoverage': '部分 UI 語系仍在持續補齊，但已支援的遊戲字串會隨語系一起切換。',
+  'footer.disclaimer': '本站為非官方玩家專案；要做最終決策前，仍建議和遊戲內實際數值再比對一次。',
 
   // === 陣營 ===
   'side.attacker': '攻擊方 (Attacker)',
