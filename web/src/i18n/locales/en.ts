@@ -78,7 +78,7 @@ const en: Record<string, string> = {
   'planner.timeLabel': 'Research time {value}',
   'planner.dataHealth': 'Data Health',
   'planner.metric.treeNodes': 'Tree nodes: {count}',
-  'planner.metric.datasetVersion': 'Dataset version: {version}',
+  'planner.metric.datasetVersion': 'Site version: {version}',
   'planner.metric.plannerReadyTechs': 'Fully plannable techs: {count}',
   'planner.metric.catalogOnlyTechs': 'Catalog-only special techs: {count}',
   'planner.metric.catalogTables': 'Catalog tables: {value}',

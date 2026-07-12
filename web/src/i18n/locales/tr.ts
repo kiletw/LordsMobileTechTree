@@ -15,6 +15,7 @@ const tr = {
   'planner.metric.techHelp': 'Planlayıcıya şu anda dahil edilen toplam araştırma girdisi.',
   'planner.metric.techLv': 'Planlanabilir Seviyeler',
   'planner.metric.techLvHelp': 'Şu anda planlanabilen toplam araştırma seviye satırı.',
+  'planner.metric.datasetVersion': 'Site sürümü: {version}',
   'planner.metric.multiplier': 'Araştırma Süresi Çarpanı',
   'planner.speedFactorHelp': 'Çarpan = 1 / (1 + araştırma hızı%)',
   'planner.browserKicker': 'Araştırma Planlama',

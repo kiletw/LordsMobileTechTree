@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useCallback, useEffect, useMemo, useRef } from 'react';
 import type { Locale, I18nContextType } from './types';
-import { zhTW, en, zhCN, ja, ko, id, tr, uk, ar, pl } from './locales';
+import { zhTW, en, zhCN, ja, ko, id, tr, uk, ar, pl, de, es, fr, it, pt, ru, ms, vi, lv, th } from './locales';
 
 /** 所有 UI 翻譯 bundle，lazy-friendly 結構 */
 const uiTranslations: Partial<Record<Locale, Record<string, string>>> = {
@@ -14,6 +14,16 @@ const uiTranslations: Partial<Record<Locale, Record<string, string>>> = {
   'uk': uk as unknown as Record<string, string>,
   'ar': ar as unknown as Record<string, string>,
   'pl': pl as unknown as Record<string, string>,
+  'de': de as unknown as Record<string, string>,
+  'es': es as unknown as Record<string, string>,
+  'fr': fr as unknown as Record<string, string>,
+  'it': it as unknown as Record<string, string>,
+  'pt': pt as unknown as Record<string, string>,
+  'ru': ru as unknown as Record<string, string>,
+  'ms': ms as unknown as Record<string, string>,
+  'vi': vi as unknown as Record<string, string>,
+  'lv': lv as unknown as Record<string, string>,
+  'th': th as unknown as Record<string, string>,
 };
 
 /** 目前有對應遊戲字串資產的語言 */
@@ -33,6 +43,7 @@ const LOCALE_STORAGE_KEY = 'lmc-locale';
 
 /** 遊戲字串快取 (per locale) */
 const gameStringCache: Record<string, Record<string, string>> = {};
+const ASSET_VERSION = encodeURIComponent(import.meta.env.VITE_APP_VERSION ?? 'dev');
 
 function normalizeLocaleCandidate(candidate: string): Locale | null {
   const lower = candidate.toLowerCase();
@@ -84,7 +95,7 @@ function resolveInitialLocale(): Locale {
 }
 
 async function fetchGameStrings(locale: Locale): Promise<Record<string, string> | null> {
-  const res = await fetch(`${import.meta.env.BASE_URL}strings/${locale}.json`);
+  const res = await fetch(`${import.meta.env.BASE_URL}strings/${locale}.json?v=${ASSET_VERSION}`);
   if (!res.ok) {
     return null;
   }
@@ -174,6 +185,8 @@ export const I18nProvider: React.FC<{ children: React.ReactNode }> = ({ children
   }, []);
 
   useEffect(() => {
+    document.documentElement.lang = locale;
+    document.documentElement.dir = locale === 'ar' ? 'rtl' : 'ltr';
     document.title = (uiTranslations[locale] ?? uiTranslations[UI_FALLBACK_LOCALE] ?? {})['app.title'] ?? 'Lords Mobile Tech Planner';
   }, [locale]);
 
