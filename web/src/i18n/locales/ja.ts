@@ -15,6 +15,7 @@ const ja = {
   'planner.metric.techHelp': '現在プランナーに収録されている研究項目の総数です。',
   'planner.metric.techLv': '計画可能レベル',
   'planner.metric.techLvHelp': '現在そのまま計画できる研究レベル行の総数です。',
+  'planner.metric.datasetVersion': 'サイトバージョン: {version}',
   'planner.metric.multiplier': '研究時間倍率',
   'planner.speedFactorHelp': '倍率 = 1 / (1 + 研究速度%)',
   'planner.browserKicker': '研究計画',

@@ -15,6 +15,7 @@ const id = {
   'planner.metric.techHelp': 'Jumlah total entri riset yang saat ini sudah masuk ke planner.',
   'planner.metric.techLv': 'Level yang Bisa Direncanakan',
   'planner.metric.techLvHelp': 'Jumlah total baris level riset yang saat ini sudah bisa direncanakan.',
+  'planner.metric.datasetVersion': 'Versi situs: {version}',
   'planner.metric.multiplier': 'Faktor Waktu Riset',
   'planner.speedFactorHelp': 'Faktor = 1 / (1 + kecepatan riset%)',
   'planner.browserKicker': 'Perencanaan Riset',

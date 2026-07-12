@@ -15,6 +15,7 @@ const uk = {
   'planner.metric.techHelp': 'Загальна кількість записів досліджень, що зараз включені до планувальника.',
   'planner.metric.techLv': 'Плановані рівні',
   'planner.metric.techLvHelp': 'Загальна кількість рядків рівнів досліджень, які вже можна планувати.',
+  'planner.metric.datasetVersion': 'Версія сайту: {version}',
   'planner.metric.multiplier': 'Множник часу дослідження',
   'planner.speedFactorHelp': 'Множник = 1 / (1 + швидкість досліджень%)',
   'planner.browserKicker': 'Планування досліджень',

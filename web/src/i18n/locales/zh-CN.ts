@@ -15,6 +15,7 @@ const zhCN = {
   'planner.metric.techHelp': '当前已收录的科技项目总数。',
   'planner.metric.techLv': '可规划等级',
   'planner.metric.techLvHelp': '当前可直接规划的科技等级资料总数。',
+  'planner.metric.datasetVersion': '网站版本: {version}',
   'planner.metric.multiplier': '研究时间倍率',
   'planner.speedFactorHelp': '倍率 = 1 / (1 + 研究速度%)',
   'planner.browserKicker': '研究规划',

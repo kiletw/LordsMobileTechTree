@@ -120,11 +120,11 @@ const RESEARCH_SPEED_STORAGE_KEY = 'lmt-research-speed'
 const CURRENT_LEVELS_STORAGE_KEY = 'lmt-current-levels'
 const TARGET_LEVELS_STORAGE_KEY = 'lmt-target-levels'
 const SELECTED_KIND_STORAGE_KEY = 'lmt-selected-kind'
-const ALLIANCE_SHOWDOWN_PERCENT_DIVISOR = 211372
-const SPECIAL_PERCENT_EFFECT_IDS = new Set([216, 217, 218, 511, 512, 513])
 const PROJECT_REPO_URL = 'https://github.com/kiletw/LordsMobileTechTree'
 const PROJECT_ISSUES_URL = `${PROJECT_REPO_URL}/issues`
 const AUTHOR_PROFILE_URL = 'https://github.com/kiletw'
+const APP_VERSION = import.meta.env.VITE_APP_VERSION ?? 'dev'
+const ASSET_VERSION = encodeURIComponent(APP_VERSION)
 
 function formatCount(locale: string, value?: number | null) {
   if (value === undefined || value === null) {
@@ -230,17 +230,9 @@ function formatScaledPercent(locale: string, scaledValue: number) {
   return `${formatter.format(scaledValue)}%`
 }
 
-function getPercentEffectDivisor(effectId: number, tech: TechEntry | undefined) {
-  if (tech?.kindId === 18 && SPECIAL_PERCENT_EFFECT_IDS.has(effectId)) {
-    return ALLIANCE_SHOWDOWN_PERCENT_DIVISOR
-  }
-
-  return 100000
-}
-
-function normalizeEffectValue(rawValue: number, effectId: number, effect: EffectEntry | undefined, tech?: TechEntry) {
+function normalizeEffectValue(rawValue: number, effect: EffectEntry | undefined) {
   if (isPercentLikeEffect(effect)) {
-    return rawValue / getPercentEffectDivisor(effectId, tech)
+    return rawValue / 100
   }
 
   return rawValue
@@ -257,11 +249,9 @@ function formatNormalizedEffectValue(locale: string, value: number, effect: Effe
 function formatEffectDisplayValue(
   locale: string,
   rawValue: number,
-  effectId: number,
   effect: EffectEntry | undefined,
-  tech?: TechEntry,
 ) {
-  return formatNormalizedEffectValue(locale, normalizeEffectValue(rawValue, effectId, effect, tech), effect)
+  return formatNormalizedEffectValue(locale, normalizeEffectValue(rawValue, effect), effect)
 }
 
 function resolveEffectMeta(
@@ -291,7 +281,7 @@ function resolveEffectMeta(
 
 function getGamePagePowerDelta(levels: TechLevel[], level: TechLevel) {
   const previousLevel = levels.find((candidate) => candidate.level === level.level - 1)
-  return level.effectValue - (previousLevel?.effectValue ?? 0)
+  return level.powerGain - (previousLevel?.powerGain ?? 0)
 }
 
 function decodeTreeNode(rawBytesHex: string, id: number): DecodedTreeNode {
@@ -403,7 +393,7 @@ function App() {
       setHasLoadError(false)
 
       try {
-        const res = await fetch(`${import.meta.env.BASE_URL}tech/TechData.json`)
+        const res = await fetch(`${import.meta.env.BASE_URL}tech/TechData.json?v=${ASSET_VERSION}`)
         if (!res.ok) {
           throw new Error('Failed to load tech dataset')
         }
@@ -412,7 +402,7 @@ function App() {
         let effectData: EffectEntry[] = []
 
         try {
-          const effectRes = await fetch(`${import.meta.env.BASE_URL}Effect.json`)
+          const effectRes = await fetch(`${import.meta.env.BASE_URL}Effect.json?v=${ASSET_VERSION}`)
           if (effectRes.ok) {
             effectData = (await effectRes.json()) as EffectEntry[]
           }
@@ -869,7 +859,7 @@ function App() {
       const delta = targetEffect.effectValue - currentEffectValue
       if (delta !== 0) {
         const effectMeta = effectById.get(targetEffect.effectId)
-        const normalizedDelta = normalizeEffectValue(delta, targetEffect.effectId, effectMeta, tech)
+        const normalizedDelta = normalizeEffectValue(delta, effectMeta)
         effectDeltas.set(targetEffect.effectId, (effectDeltas.get(targetEffect.effectId) ?? 0) + normalizedDelta)
       }
     }
@@ -932,6 +922,7 @@ function App() {
         <div className="planner-title-block">
           <h1>{t('app.title')}</h1>
           <p className="subtitle">{t('app.subtitle')}</p>
+          <small>{t('planner.metric.datasetVersion', { version: APP_VERSION === 'dev' ? (dataset?.version ?? APP_VERSION) : APP_VERSION.slice(0, 7) })}</small>
         </div>
 
         <div className="planner-controls">
@@ -1298,8 +1289,8 @@ function App() {
                         <p>{t('planner.gamePagePowerLabel', { value: formatCount(locale, getGamePagePowerDelta(selectedTech.levels, level)) })}</p>
                         <p>{t('planner.academyLabel', { value: level.academyLevel })}</p>
                         <p>{effectMeta.name}</p>
-                        <p>{t('planner.effectValueLabel', { value: formatEffectDisplayValue(locale, level.effectValue, level.effectId, effectMeta.effect, selectedTech) })}</p>
-                        <p>{t('planner.effectDeltaLabel', { value: formatEffectDisplayValue(locale, effectDelta, level.effectId, effectMeta.effect, selectedTech) })}</p>
+                        <p>{t('planner.effectValueLabel', { value: formatEffectDisplayValue(locale, level.effectValue, effectMeta.effect) })}</p>
+                        <p>{t('planner.effectDeltaLabel', { value: formatEffectDisplayValue(locale, effectDelta, effectMeta.effect) })}</p>
                         {effectMeta.description ? <p>{effectMeta.description}</p> : null}
                         <p>{t('planner.timeLabel', { value: formatDuration(level.timeSeconds) })}</p>
 

@@ -82,7 +82,7 @@ const zhTW = {
   'planner.timeLabel': '研究時間 {value}',
   'planner.dataHealth': '資料健康度',
   'planner.metric.treeNodes': '樹節點數: {count}',
-  'planner.metric.datasetVersion': '資料版本: {version}',
+  'planner.metric.datasetVersion': '網站版本: {version}',
   'planner.metric.plannerReadyTechs': '可完整規劃科技: {count}',
   'planner.metric.catalogOnlyTechs': '目錄已收錄待補科技: {count}',
   'planner.metric.catalogTables': '目錄表來源: {value}',

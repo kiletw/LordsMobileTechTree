@@ -441,9 +441,9 @@ namespace Parser
         public byte RequiredAcademyLevel; // 29
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)]
         public TechRequirementTbl[] Prerequisites; // 30 (12 bytes)
-        public uint EffectValue;        // 42
+        public uint PowerGain;          // 42
         public ushort EffectID;         // 46
-        public uint PowerGain;          // 48
+        public uint EffectValue;        // 48
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 1)]

@@ -15,6 +15,7 @@ const ar = {
   'planner.metric.techHelp': 'إجمالي إدخالات الأبحاث المدرجة حالياً في المخطط.',
   'planner.metric.techLv': 'المستويات القابلة للتخطيط',
   'planner.metric.techLvHelp': 'إجمالي صفوف مستويات الأبحاث التي يمكن التخطيط لها حالياً.',
+  'planner.metric.datasetVersion': 'إصدار الموقع: {version}',
   'planner.metric.multiplier': 'معامل وقت البحث',
   'planner.speedFactorHelp': 'المعامل = 1 / (1 + سرعة البحث%)',
   'planner.browserKicker': 'تخطيط الأبحاث',

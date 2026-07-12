@@ -15,6 +15,7 @@ const ko = {
   'planner.metric.techHelp': '현재 플래너에 포함된 전체 연구 항목 수입니다.',
   'planner.metric.techLv': '계획 가능 레벨',
   'planner.metric.techLvHelp': '바로 계획에 반영할 수 있는 연구 레벨 행의 총수입니다.',
+  'planner.metric.datasetVersion': '사이트 버전: {version}',
   'planner.metric.multiplier': '연구 시간 배율',
   'planner.speedFactorHelp': '배율 = 1 / (1 + 연구 속도%)',
   'planner.browserKicker': '연구 계획',

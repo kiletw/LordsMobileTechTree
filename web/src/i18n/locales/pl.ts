@@ -15,6 +15,7 @@ const pl = {
   'planner.metric.techHelp': 'Łączna liczba wpisów badań uwzględnionych obecnie w planerze.',
   'planner.metric.techLv': 'Planowalne poziomy',
   'planner.metric.techLvHelp': 'Łączna liczba wierszy poziomów badań, które można już zaplanować.',
+  'planner.metric.datasetVersion': 'Wersja strony: {version}',
   'planner.metric.multiplier': 'Mnożnik czasu badań',
   'planner.speedFactorHelp': 'Mnożnik = 1 / (1 + prędkość badań%)',
   'planner.browserKicker': 'Planowanie badań',
