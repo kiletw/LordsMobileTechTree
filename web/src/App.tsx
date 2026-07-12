@@ -923,7 +923,6 @@ function App() {
   const adjustedTimeSeconds = Math.ceil(totalTimeSeconds * researchTimeFactor)
   const effectSummary = Array.from(effectDeltas.entries())
     .sort((left, right) => left[0] - right[0])
-    .slice(0, 8)
   const specialCostSummary = Array.from(specialCostTotals.values())
     .sort((left, right) => left.itemId - right.itemId)
 

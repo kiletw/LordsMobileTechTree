@@ -8,15 +8,25 @@
  */
 
 /** 支援的語言代碼 — 與目前可用的遊戲字串資產對齊 */
-export type Locale = 'zh-TW' | 'en' | 'zh-CN' | 'ja' | 'ko' | 'id' | 'tr' | 'uk' | 'ar' | 'pl';
+export type Locale =
+  | 'zh-TW' | 'zh-CN' | 'en' | 'ja' | 'ko' | 'id' | 'tr' | 'uk' | 'ar' | 'pl'
+  | 'de' | 'es' | 'fr' | 'it' | 'lv' | 'ms' | 'pt' | 'ru' | 'th' | 'vi';
 
 /** 語言對應遊戲的 StringAsset 名稱 */
-export const LocaleToGameAsset: Record<Locale, string> = {
+export const LocaleToGameAsset: Partial<Record<Locale, string>> = {
   'en':    'StringEng',
   'zh-TW': 'StringCht',
   'zh-CN': 'StringChs',
+  'de':    'StringGem',
+  'es':    'StringSpa',
+  'fr':    'StringFre',
   'id':    'StringIdn',
+  'it':    'StringIta',
   'tr':    'StringTur',
+  'pt':    'StringPot',
+  'ru':    'StringRus',
+  'th':    'StringTha',
+  'vi':    'StringVet',
   'ko':    'StringKor',
   'ja':    'StringJap',
   'uk':    'StringUkr',
@@ -36,6 +46,16 @@ export const LocaleDisplayNames: Record<Locale, string> = {
   'uk':    'Українська',
   'ar':    'العربية',
   'pl':    'Polski',
+  'de':    'Deutsch',
+  'es':    'Español',
+  'fr':    'Français',
+  'it':    'Italiano',
+  'lv':    'Latviešu',
+  'ms':    'Bahasa Melayu',
+  'pt':    'Português',
+  'ru':    'Русский',
+  'th':    'ไทย',
+  'vi':    'Tiếng Việt',
 };
 
 /** UI 翻譯 key 的型別 (強型別提示) */

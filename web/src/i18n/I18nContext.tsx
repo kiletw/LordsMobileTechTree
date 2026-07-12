@@ -17,7 +17,10 @@ const uiTranslations: Partial<Record<Locale, Record<string, string>>> = {
 };
 
 /** 目前有對應遊戲字串資產的語言 */
-const SUPPORTED_LOCALES: Locale[] = ['zh-TW', 'en', 'zh-CN', 'ja', 'ko', 'id', 'tr', 'uk', 'ar', 'pl'];
+const SUPPORTED_LOCALES: Locale[] = [
+  'zh-TW', 'en', 'zh-CN', 'ja', 'ko', 'id', 'tr', 'uk', 'ar', 'pl',
+  'de', 'es', 'fr', 'it', 'lv', 'ms', 'pt', 'ru', 'th', 'vi',
+];
 
 /** 預設語言 */
 const DEFAULT_LOCALE: Locale = 'en';
@@ -46,6 +49,16 @@ function normalizeLocaleCandidate(candidate: string): Locale | null {
   if (lower.startsWith('uk')) return 'uk';
   if (lower.startsWith('ar')) return 'ar';
   if (lower.startsWith('pl')) return 'pl';
+  if (lower.startsWith('de')) return 'de';
+  if (lower.startsWith('es')) return 'es';
+  if (lower.startsWith('fr')) return 'fr';
+  if (lower.startsWith('it')) return 'it';
+  if (lower.startsWith('lv')) return 'lv';
+  if (lower.startsWith('ms')) return 'ms';
+  if (lower.startsWith('pt')) return 'pt';
+  if (lower.startsWith('ru')) return 'ru';
+  if (lower.startsWith('th')) return 'th';
+  if (lower.startsWith('vi')) return 'vi';
 
   return null;
 }
