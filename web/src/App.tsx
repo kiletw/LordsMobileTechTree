@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useSyncExternalStore, type CSSProperties } from 'react'
 import { LanguageSwitcher, useI18n } from './i18n/I18nContext'
 import './App.css'
 
@@ -110,6 +110,8 @@ type TechTreeRow = {
 
 type TechTreeEdge = {
   key: string
+  parentId: number
+  childId: number
   fromX: number
   fromY: number
   toX: number
@@ -125,6 +127,21 @@ const PROJECT_ISSUES_URL = `${PROJECT_REPO_URL}/issues`
 const AUTHOR_PROFILE_URL = 'https://github.com/kiletw'
 const APP_VERSION = import.meta.env.VITE_APP_VERSION ?? 'dev'
 const ASSET_VERSION = encodeURIComponent(APP_VERSION)
+const COMPACT_QUERY = '(max-width: 860px)'
+
+function subscribeToCompactQuery(onChange: () => void) {
+  const media = window.matchMedia(COMPACT_QUERY)
+  media.addEventListener('change', onChange)
+  return () => media.removeEventListener('change', onChange)
+}
+
+function getCompactSnapshot() {
+  return window.matchMedia(COMPACT_QUERY).matches
+}
+
+function formatCompactCount(locale: string, value: number) {
+  return new Intl.NumberFormat(locale, { notation: 'compact', maximumFractionDigits: 1 }).format(value)
+}
 
 function formatCount(locale: string, value?: number | null) {
   if (value === undefined || value === null) {
@@ -351,7 +368,7 @@ function getUnlockLevel(tech: TechEntry) {
 }
 
 function App() {
-  const { gameString, gameStrings, locale, t } = useI18n()
+  const { gameString, locale, t } = useI18n()
   const [dataset, setDataset] = useState<TechDataset | null>(null)
   const [effects, setEffects] = useState<EffectEntry[]>([])
   const [isLoading, setIsLoading] = useState(true)
@@ -366,6 +383,7 @@ function App() {
   const [researchSpeedBonus, setResearchSpeedBonus] = useState(() => {
     return localStorage.getItem(RESEARCH_SPEED_STORAGE_KEY) ?? '0'
   })
+  const isCompact = useSyncExternalStore(subscribeToCompactQuery, getCompactSnapshot, () => false)
 
   useEffect(() => {
     localStorage.setItem(RESEARCH_SPEED_STORAGE_KEY, researchSpeedBonus)
@@ -478,11 +496,11 @@ function App() {
     unlockDependencyIdsByTechId.set(tech.id, dependencyIds)
   }
 
-  const treeNodeCellWidth = 252
-  const treeNodeCellHeight = 228
-  const treeNodeYInset = 28
-  const techCardBaseHeight = 180
-  const techCardMinWidth = 220
+  const treeNodeWidth = 168
+  const treeNodeHeight = 80
+  const treeNodeCellWidth = 200
+  const treeNodeCellHeight = 132
+  const treeNodeYInset = 8
   const maxCardsPerTreeRow = 4
   const techDepthById = new Map<number, number>()
   const visitingTechIds = new Set<number>()
@@ -614,7 +632,7 @@ function App() {
 
     for (const card of row.cards) {
       cardPositionByTechId.set(card.tech.id, {
-        x: rowOffsetX + (card.column * treeNodeCellWidth) + (treeNodeCellWidth / 2),
+        x: rowOffsetX + (card.column * treeNodeCellWidth) + ((treeNodeCellWidth - treeNodeWidth) / 2),
         y: (card.row * treeNodeCellHeight) + treeNodeYInset,
       })
     }
@@ -642,9 +660,11 @@ function App() {
       seenEdgeKeys.add(edgeKey)
       techTreeEdges.push({
         key: edgeKey,
-        fromX: sourcePosition.x,
-        fromY: sourcePosition.y + techCardBaseHeight,
-        toX: targetPosition.x,
+        parentId: dependencyId,
+        childId: tech.id,
+        fromX: sourcePosition.x + (treeNodeWidth / 2),
+        fromY: sourcePosition.y + treeNodeHeight,
+        toX: targetPosition.x + (treeNodeWidth / 2),
         toY: targetPosition.y,
       })
     }
@@ -910,453 +930,505 @@ function App() {
     }
   }
 
+  const plannedCountByKindId = new Map<number, number>()
+  const techCountByKindId = new Map<number, number>()
+  for (const tech of techs) {
+    techCountByKindId.set(tech.kindId, (techCountByKindId.get(tech.kindId) ?? 0) + 1)
+
+    if (isPlannerSupported(tech)) {
+      const techCurrentLevel = getCurrentLevel(tech)
+      if (getTargetLevel(tech, techCurrentLevel) > techCurrentLevel) {
+        plannedCountByKindId.set(tech.kindId, (plannedCountByKindId.get(tech.kindId) ?? 0) + 1)
+      }
+    }
+  }
+
+  function getUnmetUnlockRequirements(tech: TechEntry) {
+    const unlockLevel = getUnlockLevel(tech)
+    const unmet: string[] = []
+
+    for (const requirement of unlockLevel?.prerequisites ?? []) {
+      const requiredTech = techById.get(requirement.techId)
+      if (!requiredTech || requiredTech.id === tech.id) {
+        continue
+      }
+
+      const requiredCurrent = getCurrentLevel(requiredTech)
+      if (getTargetLevel(requiredTech, requiredCurrent) < requirement.level) {
+        unmet.push(`${resolveGameText(gameString, requiredTech.nameKey, requiredTech.name)} Lv.${requirement.level}`)
+      }
+    }
+
+    return unmet
+  }
+
   const adjustedTimeSeconds = Math.ceil(totalTimeSeconds * researchTimeFactor)
   const effectSummary = Array.from(effectDeltas.entries())
     .sort((left, right) => left[0] - right[0])
   const specialCostSummary = Array.from(specialCostTotals.values())
     .sort((left, right) => left.itemId - right.itemId)
 
-  return (
-    <div className="planner-shell">
-      <header className="panel planner-header">
-        <div className="planner-title-block">
-          <h1>{t('app.title')}</h1>
-          <p className="subtitle">{t('app.subtitle')}</p>
-          <small>{t('planner.metric.datasetVersion', { version: APP_VERSION === 'dev' ? (dataset?.version ?? APP_VERSION) : APP_VERSION.slice(0, 7) })}</small>
+  const resourceTotals = [
+    { key: 'food', label: t('planner.resource.food'), value: totalFood },
+    { key: 'stone', label: t('planner.resource.stone'), value: totalStone },
+    { key: 'wood', label: t('planner.resource.wood'), value: totalWood },
+    { key: 'iron', label: t('planner.resource.iron'), value: totalIron },
+    { key: 'gold', label: t('planner.resource.gold'), value: totalGold },
+  ]
+
+  const activeKind = kinds.find((kind) => kind.id === activeKindId) ?? null
+  const selectedCurrentLevel = selectedTech ? getCurrentLevel(selectedTech) : 0
+  const selectedTargetLevel = selectedTech ? getTargetLevel(selectedTech, selectedCurrentLevel) : 0
+  const selectedUnlockLevel = selectedTech && isPlannerSupported(selectedTech) ? getUnlockLevel(selectedTech) : null
+  const selectedEffectMeta = selectedUnlockLevel
+    ? resolveEffectMeta(selectedUnlockLevel.effectId, effectById, gameString, t)
+    : null
+  const selectedAcademyLevel = selectedTech
+    ? selectedTech.levels.reduce(
+        (highest, level) => (level.level > selectedCurrentLevel && level.level <= selectedTargetLevel
+          ? Math.max(highest, level.academyLevel)
+          : highest),
+        0,
+      )
+    : 0
+
+  function renderTechNode(tech: TechEntry, style?: CSSProperties) {
+    const currentLevel = getCurrentLevel(tech)
+    const targetLevel = getTargetLevel(tech, currentLevel)
+    const plannerSupported = isPlannerSupported(tech)
+    const isPlanned = targetLevel > currentLevel
+    const unmetRequirements = plannerSupported && targetLevel === 0 ? getUnmetUnlockRequirements(tech) : []
+    const isLocked = unmetRequirements.length > 0
+    const label = resolveGameText(gameString, tech.nameKey, tech.name)
+    const levelText = isPlanned ? `${currentLevel}→${targetLevel}` : String(currentLevel)
+    const classNames = [
+      'node',
+      isPlanned ? 'is-planned' : '',
+      isLocked ? 'is-locked' : '',
+      plannerSupported ? '' : 'is-catalog',
+      tech.id === selectedTech?.id ? 'is-selected' : '',
+    ].filter(Boolean).join(' ')
+
+    return (
+      <button
+        key={tech.id}
+        type="button"
+        className={classNames}
+        style={style}
+        title={isLocked ? `${t('planner.missingRequirements')}: ${unmetRequirements.join(', ')}` : label}
+        aria-pressed={tech.id === selectedTech?.id}
+        onClick={() => setSelectedTechId(tech.id)}
+      >
+        <span className="node-name">{label}</span>
+        <span className="node-meter">
+          {plannerSupported ? (
+            <>
+              <span className="pips" aria-hidden="true">
+                {Array.from({ length: tech.maxLevel }, (_, index) => (
+                  <i
+                    key={index}
+                    className={index < currentLevel ? 'is-current' : index < targetLevel ? 'is-planned' : ''}
+                  />
+                ))}
+              </span>
+              <span className="lv" dir="ltr">{levelText}</span>
+            </>
+          ) : (
+            <span className="node-badge">{t('planner.catalogOnlyBadge')}</span>
+          )}
+        </span>
+      </button>
+    )
+  }
+
+  function renderStepper(
+    label: string,
+    value: number,
+    minLevel: number,
+    maxLevel: number,
+    onChange: (nextValue: number) => void,
+  ) {
+    return (
+      <div className="step" role="group" aria-label={label}>
+        <span>{label}</span>
+        <div className="stepper">
+          <button type="button" aria-label={`${label} −`} disabled={value <= minLevel} onClick={() => onChange(value - 1)}>
+            −
+          </button>
+          <select aria-label={label} value={value} onChange={(event) => onChange(Number(event.target.value))}>
+            {Array.from({ length: maxLevel + 1 }, (_, level) => (
+              <option key={level} value={level}>
+                {level}
+              </option>
+            ))}
+          </select>
+          <button type="button" aria-label={`${label} +`} disabled={value >= maxLevel} onClick={() => onChange(value + 1)}>
+            +
+          </button>
         </div>
+      </div>
+    )
+  }
 
-        <div className="planner-controls">
-          <LanguageSwitcher />
+  const litEdges = techTreeEdges.map((edge) => {
+    const parent = techById.get(edge.parentId)
+    const child = techById.get(edge.childId)
+    const childCurrent = child ? getCurrentLevel(child) : 0
+    const parentCurrent = parent ? getCurrentLevel(parent) : 0
+    const isLit = Boolean(
+      parent && child
+      && isPlannerSupported(child)
+      && getTargetLevel(child, childCurrent) > childCurrent
+      && getTargetLevel(parent, parentCurrent) > 0,
+    )
 
-          <label className="research-speed-field">
-            <span>{t('planner.researchSpeed')}</span>
-            <input
-              type="number"
-              inputMode="decimal"
-              value={researchSpeedBonus}
-              onChange={(event) => setResearchSpeedBonus(event.target.value)}
+    return { edge, isLit }
+  }).sort((left, right) => Number(left.isLit) - Number(right.isLit))
+
+  const treeContent = hasLoadError ? (
+    <p className="empty-state">{t('planner.error')}</p>
+  ) : isLoading ? (
+    <p className="empty-state">{t('planner.loading')}</p>
+  ) : techs.length === 0 ? (
+    <p className="empty-state">{t('planner.datasetMissing')}</p>
+  ) : visibleTechs.length === 0 ? (
+    <p className="empty-state">{t('planner.kindEmpty')}</p>
+  ) : isCompact ? (
+    <ol className="route">
+      {techTreeRows.flatMap((row) => row.cards).map(({ tech }) => {
+        const techCurrent = getCurrentLevel(tech)
+        const isPlanned = isPlannerSupported(tech) && getTargetLevel(tech, techCurrent) > techCurrent
+
+        return (
+          <li
+            key={tech.id}
+            className={`route-item ${isPlanned ? 'is-planned' : ''}`}
+            style={{ '--depth': Math.min(techDepthById.get(tech.id) ?? 0, 3) } as CSSProperties}
+          >
+            <span className="route-dot" aria-hidden="true" />
+            {renderTechNode(tech)}
+          </li>
+        )
+      })}
+    </ol>
+  ) : (
+    <div className="board" style={{ width: `${treeBoardWidth}px`, height: `${treeBoardHeight}px` }}>
+      <svg
+        className="board-edges"
+        width={treeBoardWidth}
+        height={treeBoardHeight}
+        viewBox={`0 0 ${treeBoardWidth} ${treeBoardHeight}`}
+        aria-hidden="true"
+      >
+        {litEdges.map(({ edge, isLit }) => {
+          const controlY = edge.fromY + ((edge.toY - edge.fromY) * 0.5)
+
+          return (
+            <path
+              key={`${edge.key}:${isLit ? 'lit' : 'idle'}`}
+              d={`M ${edge.fromX} ${edge.fromY} C ${edge.fromX} ${controlY}, ${edge.toX} ${controlY}, ${edge.toX} ${edge.toY}`}
+              className={isLit ? 'edge is-lit' : 'edge'}
+              pathLength={1}
             />
-            <small>{t('planner.researchSpeedHelp')}</small>
-          </label>
-        </div>
+          )
+        })}
+      </svg>
+
+      {techTreeRows.flatMap((row) => row.cards).map(({ tech }) => {
+        const position = cardPositionByTechId.get(tech.id)
+        return renderTechNode(tech, position ? { left: position.x, top: position.y } : undefined)
+      })}
+    </div>
+  )
+
+  return (
+    <div className="app">
+      <header className="topbar">
+        <h1 className="brand">{t('app.title')}</h1>
+
+        <label className="field">
+          <span>{t('planner.researchSpeed')}</span>
+          <input
+            type="number"
+            inputMode="decimal"
+            value={researchSpeedBonus}
+            title={t('planner.researchSpeedHelp')}
+            onChange={(event) => setResearchSpeedBonus(event.target.value)}
+          />
+        </label>
+
+        <LanguageSwitcher />
       </header>
 
-      <main className="planner-grid">
-        <section className="panel overview-panel">
-          <div className="section-heading">
-            <div>
-              <p className="section-kicker">{t('planner.statusLabel')}</p>
-              <h2>{t('planner.overviewTitle')}</h2>
-            </div>
-            <span className="status-pill status-pill--ready">{t('planner.ready')}</span>
-          </div>
+      <main>
+        <div className="workspace">
+          <nav className="rail" aria-label={t('planner.kindColumn')}>
+            {kinds.map((kind) => {
+              const plannedCount = plannedCountByKindId.get(kind.id) ?? 0
 
-          <div className="metric-grid">
-            <article className="metric-card">
-              <span>{t('planner.metric.locale')}</span>
-              <strong>{locale}</strong>
-              <small>{t('planner.localeLabel')}</small>
-            </article>
+              return (
+                <button
+                  key={kind.id}
+                  type="button"
+                  aria-current={kind.id === activeKindId ? 'true' : undefined}
+                  onClick={() => setSelectedKindId(kind.id)}
+                >
+                  <span>{resolveGameText(gameString, kind.nameKey, kind.name)}</span>
+                  <span className={`count ${plannedCount > 0 ? 'has-plan' : ''}`} dir="ltr">
+                    {plannedCount}/{techCountByKindId.get(kind.id) ?? 0}
+                  </span>
+                </button>
+              )
+            })}
+          </nav>
 
-            <article className="metric-card">
-              <span>{t('planner.metric.strings')}</span>
-              <strong>{formatCount(locale, Object.keys(gameStrings).length)}</strong>
-              <small>{t('planner.rows', { count: Object.keys(gameStrings).length })}</small>
-            </article>
-
-            <article className="metric-card">
-              <span>{t('planner.metric.kinds')}</span>
-              <strong>{formatCount(locale, kinds.length)}</strong>
-              <small>{t('planner.metric.kindsHelp')}</small>
-            </article>
-
-            <article className="metric-card">
-              <span>{t('planner.metric.tech')}</span>
-              <strong>{formatCount(locale, techs.length)}</strong>
-              <small>{t('planner.metric.techHelp')}</small>
-            </article>
-
-            <article className="metric-card">
-              <span>{t('planner.metric.techLv')}</span>
-              <strong>{formatCount(locale, techs.reduce((sum, tech) => sum + tech.levels.length, 0))}</strong>
-              <small>{t('planner.metric.techLvHelp')}</small>
-            </article>
-
-            <article className="metric-card">
-              <span>{t('planner.metric.multiplier')}</span>
-              <strong>x{researchTimeFactor.toFixed(3)}</strong>
-              <small>{t('planner.speedFactorHelp')}</small>
-            </article>
-          </div>
-
-          <p className="overview-note">{t('planner.overviewNote')}</p>
-        </section>
-
-        <section className="panel planner-browser-panel">
-          <div className="section-heading">
-            <div>
-              <p className="section-kicker">{t('planner.browserKicker')}</p>
-              <h2>{t('planner.browserTitle')}</h2>
-            </div>
-
-            <span className={`status-pill ${isLoading ? 'status-pill--loading' : 'status-pill--ready'}`}>
-              {isLoading ? t('planner.loading') : t('planner.ready')}
-            </span>
-          </div>
-
-          {hasLoadError ? <p className="empty-state">{t('planner.error')}</p> : null}
-
-          {!hasLoadError && !isLoading && techs.length === 0 ? (
-            <p className="empty-state">{t('planner.datasetMissing')}</p>
-          ) : null}
-
-          <div className="planner-browser-grid">
-            <div className="kind-column">
-              <p className="probe-label">{t('planner.kindColumn')}</p>
-              <div className="kind-list">
-                {kinds.map((kind) => (
-                  <button
-                    key={kind.id}
-                    type="button"
-                    className={`kind-pill ${kind.id === activeKindId ? 'kind-pill--active' : ''}`}
-                    onClick={() => setSelectedKindId(kind.id)}
-                  >
-                    <span>{resolveGameText(gameString, kind.nameKey, kind.name)}</span>
-                    <small>{techs.filter((tech) => tech.kindId === kind.id).length}</small>
-                  </button>
-                ))}
+          <section className="canvas" aria-label={t('planner.techColumn')}>
+            <div className="canvas-bar">
+              <h2>{activeKind ? resolveGameText(gameString, activeKind.nameKey, activeKind.name) : t('planner.browserTitle')}</h2>
+              <div className="canvas-actions">
+                <button type="button" className="btn" onClick={syncTargetsToCurrent}>
+                  {t('planner.syncTargets')}
+                </button>
+                <button type="button" className="btn" onClick={resetPlanner}>
+                  {t('planner.resetPlanner')}
+                </button>
               </div>
             </div>
+            <div className="canvas-scroll">{treeContent}</div>
+          </section>
 
-            <div className="tech-column">
-              <div className="tech-column__header">
-                <p className="probe-label">{t('planner.techColumn')}</p>
-                <div className="planner-actions">
-                  <button type="button" className="secondary-button" onClick={syncTargetsToCurrent}>
-                    {t('planner.syncTargets')}
-                  </button>
-                  <button type="button" className="secondary-button" onClick={resetPlanner}>
-                    {t('planner.resetPlanner')}
-                  </button>
+          <aside className="inspector" aria-label={t('planner.selectedTech')}>
+            {!selectedTech ? (
+              <p className="empty-state inspector-empty">{t('planner.noSelectedTech')}</p>
+            ) : (
+              <>
+                <div className="insp-edit">
+                  <h2 className="insp-title">{resolveGameText(gameString, selectedTech.nameKey, selectedTech.name)}</h2>
+
+                  {isPlannerSupported(selectedTech) ? (
+                    <>
+                      <div className="steps">
+                        {renderStepper(
+                          t('planner.currentLevel'),
+                          selectedCurrentLevel,
+                          0,
+                          selectedTech.maxLevel,
+                          (nextValue) => updateCurrentLevel(selectedTech, nextValue),
+                        )}
+                        {renderStepper(
+                          t('planner.targetLevel'),
+                          selectedTargetLevel,
+                          selectedCurrentLevel,
+                          selectedTech.maxLevel,
+                          (nextValue) => updateTargetLevel(selectedTech, nextValue),
+                        )}
+                      </div>
+                      {selectedAcademyLevel > 0 ? (
+                        <p className="insp-need">{t('planner.maxAcademy')}: Lv.{selectedAcademyLevel}</p>
+                      ) : null}
+                    </>
+                  ) : (
+                    <p className="insp-note">
+                      {selectedTech.supplementalLevelCount > 0
+                        ? t('planner.catalogOnlyDetail', { count: selectedTech.supplementalLevelCount })
+                        : t('planner.missingTechDetail')}
+                    </p>
+                  )}
                 </div>
-              </div>
 
-              {visibleTechs.length === 0 ? (
-                <p className="empty-state">{t('planner.kindEmpty')}</p>
-              ) : (
-                <>
-                  <div className="tech-tree-scroll">
-                    <div
-                      className="tech-tree-board"
-                      style={{
-                        minWidth: `${treeBoardWidth}px`,
-                      }}
-                    >
-                      <svg
-                        className="tech-tree-board__edges"
-                        viewBox={`0 0 ${treeBoardWidth} ${treeBoardHeight}`}
-                        preserveAspectRatio="none"
-                        aria-hidden="true"
-                      >
-                        {techTreeEdges.map((edge) => {
-                          const controlY = edge.fromY + ((edge.toY - edge.fromY) * 0.5)
+                {isPlannerSupported(selectedTech) ? (
+                  <div className="insp-levels">
+                    {selectedEffectMeta ? (
+                      <div className="insp-effect">
+                        <p>{selectedEffectMeta.name}</p>
+                        {selectedEffectMeta.description ? <p>{selectedEffectMeta.description}</p> : null}
+                      </div>
+                    ) : null}
 
-                          return (
-                            <path
-                              key={edge.key}
-                              d={`M ${edge.fromX} ${edge.fromY} C ${edge.fromX} ${controlY}, ${edge.toX} ${controlY}, ${edge.toX} ${edge.toY}`}
-                              className="tech-tree-edge"
-                            />
-                          )
-                        })}
-                      </svg>
+                    <ol className="levels">
+                      {selectedTech.levels.map((level) => {
+                        const isReached = level.level <= selectedCurrentLevel
+                        const isPlanned = level.level > selectedCurrentLevel && level.level <= selectedTargetLevel
+                        const effectMeta = resolveEffectMeta(level.effectId, effectById, gameString, t)
+                        const effectDelta = getEffectDelta(selectedTech.levels, level)
+                        const powerGain = getGamePagePowerDelta(selectedTech.levels, level)
 
-                      {techTreeRows.map((row) => (
-                        <section
-                          key={`row-${row.row}-depth-${row.depth}`}
-                          className="tech-tree-row"
-                          style={{
-                            gridTemplateColumns: `repeat(${Math.max(row.cards.length, 1)}, minmax(${techCardMinWidth}px, 1fr))`,
-                            width: `${Math.max(row.cards.length, 1) * treeNodeCellWidth}px`,
-                          }}
-                        >
-                            {row.cards.map(({ tech, sameKindParents }) => {
-                              const currentLevel = getCurrentLevel(tech)
-                              const targetLevel = getTargetLevel(tech, currentLevel)
-                              const label = resolveGameText(gameString, tech.nameKey, tech.name)
-                              const plannerSupported = isPlannerSupported(tech)
+                        return (
+                          <li
+                            key={level.rowId}
+                            className={`level ${isReached ? 'is-reached' : ''} ${isPlanned ? 'is-planned' : ''}`}
+                          >
+                            <span className="level-n" title={t('planner.levelTitle', { level: level.level })}>{level.level}</span>
+                            <span className="level-time" title={t('planner.timeLabel', { value: formatDuration(level.timeSeconds) })}>
+                              {formatDuration(level.timeSeconds)}
+                            </span>
+                            <span className="level-power" title={t('planner.gamePagePowerLabel', { value: formatCount(locale, powerGain) })}>
+                              +{formatCount(locale, powerGain)}
+                            </span>
 
-                              return (
-                                <article
-                                  key={tech.id}
-                                  className={`tech-card tech-card--tree ${tech.id === selectedTech?.id ? 'tech-card--active' : ''} ${plannerSupported ? '' : 'tech-card--unsupported'}`}
-                                  onClick={() => setSelectedTechId(tech.id)}
-                                >
-                                  <div className="tech-card__title">
-                                    <div>
-                                      <h3>{label}</h3>
-                                    </div>
-                                    <span className={`status-pill ${plannerSupported ? 'status-pill--muted' : 'status-pill--warning'}`}>
-                                      {plannerSupported ? `Lv.${tech.maxLevel}` : t('planner.catalogOnlyBadge')}
-                                    </span>
-                                  </div>
+                            <p className="level-meta">
+                              <span>{t('planner.academyLabel', { value: level.academyLevel })}</span>
+                              <span>{t('planner.effectValueLabel', { value: formatEffectDisplayValue(locale, level.effectValue, effectMeta.effect) })}</span>
+                              <span>{t('planner.effectDeltaLabel', { value: formatEffectDisplayValue(locale, effectDelta, effectMeta.effect) })}</span>
+                            </p>
 
-                                  {sameKindParents.length > 0 ? (
-                                    <ul className="tech-card__dependency-list">
-                                      {sameKindParents.slice(0, 2).map((parent) => (
-                                        <li key={parent.id}>{resolveGameText(gameString, parent.nameKey, parent.name)}</li>
-                                      ))}
-                                      {sameKindParents.length > 2 ? <li key={`${tech.id}-more`}>+{sameKindParents.length - 2}</li> : null}
-                                    </ul>
-                                  ) : (
-                                    <div className="tech-card__root-mark" />
-                                  )}
+                            {(level.prerequisites.length > 0 || (level.specialCosts?.length ?? 0) > 0) ? (
+                              <ul className="level-tags">
+                                {level.prerequisites.map((requirement) => {
+                                  const requiredTech = techById.get(requirement.techId)
+                                  const requirementLabel = requiredTech
+                                    ? resolveGameText(gameString, requiredTech.nameKey, requiredTech.name)
+                                    : `#${requirement.techId}`
 
-                                  {plannerSupported ? (
-                                    <div className="level-input-grid">
-                                      <label>
-                                        <span>{t('planner.currentLevel')}</span>
-                                        <select
-                                          value={currentLevel}
-                                          onChange={(event) => updateCurrentLevel(tech, Number(event.target.value))}
-                                          onClick={(event) => event.stopPropagation()}
-                                        >
-                                          {Array.from({ length: tech.maxLevel + 1 }, (_, level) => (
-                                            <option key={level} value={level}>
-                                              {level}
-                                            </option>
-                                          ))}
-                                        </select>
-                                      </label>
-
-                                      <label>
-                                        <span>{t('planner.targetLevel')}</span>
-                                        <select
-                                          value={targetLevel}
-                                          onChange={(event) => updateTargetLevel(tech, Number(event.target.value))}
-                                          onClick={(event) => event.stopPropagation()}
-                                        >
-                                          {Array.from({ length: tech.maxLevel + 1 }, (_, level) => (
-                                            <option key={level} value={level}>
-                                              {level}
-                                            </option>
-                                          ))}
-                                        </select>
-                                      </label>
-                                    </div>
-                                  ) : (
-                                    <p className="tech-card__support-note">{t('planner.catalogOnlyHint')}</p>
-                                  )}
-                                </article>
-                              )
-                            })}
-                        </section>
-                      ))}
-                    </div>
+                                  return <li key={`${level.rowId}-req-${requirement.techId}`}>{`${requirementLabel} Lv.${requirement.level}`}</li>
+                                })}
+                                {(level.specialCosts ?? []).map((specialCost) => (
+                                  <li key={`${level.rowId}-special-${specialCost.itemId}`}>
+                                    {t('planner.specialCostSummary', {
+                                      name: resolveSpecialCostName(gameString, specialCost.itemNameKey, specialCost.itemName, specialCost.itemId, t),
+                                      value: formatCount(locale, specialCost.amount),
+                                    })}
+                                  </li>
+                                ))}
+                              </ul>
+                            ) : null}
+                          </li>
+                        )
+                      })}
+                    </ol>
                   </div>
-                </>
-              )}
-            </div>
-          </div>
-        </section>
+                ) : null}
+              </>
+            )}
+          </aside>
+        </div>
 
-        <aside className="panel detail-panel">
-          <div className="section-heading">
-            <div>
-              <p className="section-kicker">{t('planner.summaryKicker')}</p>
-              <h2>{t('planner.summaryTitle')}</h2>
-            </div>
-          </div>
+        <section className="details" id="plan-details" aria-labelledby="plan-details-title">
+          <h2 id="plan-details-title">{t('planner.summaryTitle')}</h2>
 
-          <div className="summary-metrics">
-            <div className="summary-card">
-              <span>{t('planner.plannedTechs')}</span>
-              <strong>{formatCount(locale, plannedTechCount)}</strong>
-            </div>
-            <div className="summary-card">
-              <span>{t('planner.plannedLevels')}</span>
-              <strong>{formatCount(locale, plannedLevelCount)}</strong>
-            </div>
-            <div className="summary-card">
-              <span>{t('planner.totalGamePagePower')}</span>
-              <strong>{formatCount(locale, totalGamePagePower)}</strong>
-            </div>
-            <div className="summary-card">
-              <span>{t('planner.maxAcademy')}</span>
-              <strong>Lv.{maxAcademyLevel}</strong>
-            </div>
-          </div>
-
-          <dl className="resource-list">
-            <div><dt>{t('planner.resource.food')}</dt><dd>{formatCount(locale, totalFood)}</dd></div>
-            <div><dt>{t('planner.resource.stone')}</dt><dd>{formatCount(locale, totalStone)}</dd></div>
-            <div><dt>{t('planner.resource.wood')}</dt><dd>{formatCount(locale, totalWood)}</dd></div>
-            <div><dt>{t('planner.resource.iron')}</dt><dd>{formatCount(locale, totalIron)}</dd></div>
-            <div><dt>{t('planner.resource.gold')}</dt><dd>{formatCount(locale, totalGold)}</dd></div>
+          <dl className="stats">
+            <div><dt>{t('planner.plannedTechs')}</dt><dd>{formatCount(locale, plannedTechCount)}</dd></div>
+            <div><dt>{t('planner.plannedLevels')}</dt><dd>{formatCount(locale, plannedLevelCount)}</dd></div>
             <div><dt>{t('planner.totalTime')}</dt><dd>{formatDuration(totalTimeSeconds)}</dd></div>
             <div><dt>{t('planner.totalTimeAdjusted')}</dt><dd>{formatDuration(adjustedTimeSeconds)}</dd></div>
+            {resourceTotals.map((resource) => (
+              <div key={resource.key}><dt>{resource.label}</dt><dd>{formatCount(locale, resource.value)}</dd></div>
+            ))}
           </dl>
 
-          <div className="detail-block">
-            <p className="probe-label">{t('planner.specialCosts')}</p>
-            {specialCostSummary.length === 0 ? (
-              <div className="special-cost-list">
-                <article className="special-cost-card special-cost-card--empty">
-                  <span>{t('planner.specialCosts')}</span>
-                  <strong>0</strong>
-                  <small>{t('planner.noSpecialCosts')}</small>
-                </article>
-              </div>
-            ) : (
-              <div className="special-cost-list">
-                {specialCostSummary.map((specialCost) => (
-                  <article className="special-cost-card" key={specialCost.itemId}>
-                    <span>{resolveSpecialCostName(gameString, specialCost.itemNameKey, specialCost.itemName, specialCost.itemId, t)}</span>
-                    <strong>{formatCount(locale, specialCost.amount)}</strong>
-                  </article>
-                ))}
-              </div>
-            )}
-          </div>
+          <div className="detail-columns">
+            <section>
+              <h3>{t('planner.specialCosts')}</h3>
+              {specialCostSummary.length === 0 ? (
+                <p className="empty-state">{t('planner.noSpecialCosts')}</p>
+              ) : (
+                <ul className="rows">
+                  {specialCostSummary.map((specialCost) => (
+                    <li key={specialCost.itemId}>
+                      <span>{resolveSpecialCostName(gameString, specialCost.itemNameKey, specialCost.itemName, specialCost.itemId, t)}</span>
+                      <strong>{formatCount(locale, specialCost.amount)}</strong>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </section>
 
-          <div className="detail-block">
-            <p className="probe-label">{t('planner.missingRequirements')}</p>
-            {missingRequirements.size === 0 ? (
-              <p className="empty-state">{t('planner.noMissingRequirements')}</p>
-            ) : (
-              <ul className="tag-list">
-                {Array.from(missingRequirements.values()).slice(0, 10).map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-            )}
-          </div>
+            <section>
+              <h3>{t('planner.missingRequirements')}</h3>
+              {missingRequirements.size === 0 ? (
+                <p className="empty-state">{t('planner.noMissingRequirements')}</p>
+              ) : (
+                <ul className="rows">
+                  {Array.from(missingRequirements.values()).slice(0, 10).map((item) => (
+                    <li key={item}><span>{item}</span></li>
+                  ))}
+                </ul>
+              )}
+            </section>
 
-          <div className="detail-block">
-            <p className="probe-label">{t('planner.effectSummary')}</p>
-            {effectSummary.length === 0 ? (
-              <p className="empty-state">{t('planner.noEffectChanges')}</p>
-            ) : (
-              <ul className="tag-list">
-                {effectSummary.map(([effectId, value]) => (
-                  <li key={effectId}>
-                    {(() => {
-                      const effectMeta = resolveEffectMeta(effectId, effectById, gameString, t)
-                      return formatEffectMetricLabel(
-                        effectMeta.name,
-                        formatNormalizedEffectValue(locale, value, effectMeta.effect),
-                      )
-                    })()}
-                  </li>
-                ))}
-              </ul>
-            )}
-          </div>
-
-          <div className="detail-block">
-            <p className="probe-label">{t('planner.selectedTech')}</p>
-            {!selectedTech ? (
-              <p className="empty-state">{t('planner.noSelectedTech')}</p>
-            ) : !isPlannerSupported(selectedTech) ? (
-              <div className="selected-tech-panel">
-                <h3>{resolveGameText(gameString, selectedTech.nameKey, selectedTech.name)}</h3>
-                <p className="empty-state">
-                  {selectedTech.supplementalLevelCount > 0
-                    ? t('planner.catalogOnlyDetail', { count: selectedTech.supplementalLevelCount })
-                    : t('planner.missingTechDetail')}
-                </p>
-              </div>
-            ) : (
-              <div className="selected-tech-panel">
-                <h3>{resolveGameText(gameString, selectedTech.nameKey, selectedTech.name)}</h3>
-
-                <div className="level-detail-list">
-                  {selectedTech.levels.map((level) => {
-                    const isReached = level.level <= getCurrentLevel(selectedTech)
-                    const isPlanned = level.level > getCurrentLevel(selectedTech) && level.level <= getTargetLevel(selectedTech, getCurrentLevel(selectedTech))
-                    const effectMeta = resolveEffectMeta(level.effectId, effectById, gameString, t)
-                    const effectDelta = getEffectDelta(selectedTech.levels, level)
+            <section>
+              <h3>{t('planner.effectSummary')}</h3>
+              {effectSummary.length === 0 ? (
+                <p className="empty-state">{t('planner.noEffectChanges')}</p>
+              ) : (
+                <ul className="rows">
+                  {effectSummary.map(([effectId, value]) => {
+                    const effectMeta = resolveEffectMeta(effectId, effectById, gameString, t)
 
                     return (
-                      <article
-                        key={level.rowId}
-                        className={`level-detail-card ${isReached ? 'level-detail-card--current' : ''} ${isPlanned ? 'level-detail-card--planned' : ''}`}
-                      >
-                        <div className="level-detail-card__header">
-                          <strong>{t('planner.levelTitle', { level: level.level })}</strong>
-                        </div>
-
-                        <p>{t('planner.gamePagePowerLabel', { value: formatCount(locale, getGamePagePowerDelta(selectedTech.levels, level)) })}</p>
-                        <p>{t('planner.academyLabel', { value: level.academyLevel })}</p>
-                        <p>{effectMeta.name}</p>
-                        <p>{t('planner.effectValueLabel', { value: formatEffectDisplayValue(locale, level.effectValue, effectMeta.effect) })}</p>
-                        <p>{t('planner.effectDeltaLabel', { value: formatEffectDisplayValue(locale, effectDelta, effectMeta.effect) })}</p>
-                        {effectMeta.description ? <p>{effectMeta.description}</p> : null}
-                        <p>{t('planner.timeLabel', { value: formatDuration(level.timeSeconds) })}</p>
-
-                        {level.specialCosts && level.specialCosts.length > 0 ? (
-                          <ul className="tag-list tag-list--compact">
-                            {level.specialCosts.map((specialCost) => (
-                              <li key={`${level.rowId}-special-${specialCost.itemId}`}>
-                                {t('planner.specialCostSummary', {
-                                  name: resolveSpecialCostName(gameString, specialCost.itemNameKey, specialCost.itemName, specialCost.itemId, t),
-                                  value: formatCount(locale, specialCost.amount),
-                                })}
-                              </li>
-                            ))}
-                          </ul>
-                        ) : null}
-
-                        {level.prerequisites.length > 0 ? (
-                          <ul className="tag-list tag-list--compact">
-                            {level.prerequisites.map((requirement) => {
-                              const requiredTech = techs.find((tech) => tech.id === requirement.techId)
-                              const label = requiredTech
-                                ? resolveGameText(gameString, requiredTech.nameKey, requiredTech.name)
-                                : `#${requirement.techId}`
-
-                              return <li key={`${level.rowId}-${requirement.techId}`}>{`${label} Lv.${requirement.level}`}</li>
-                            })}
-                          </ul>
-                        ) : null}
-                      </article>
+                      <li key={effectId}>
+                        <span>
+                          {formatEffectMetricLabel(
+                            effectMeta.name,
+                            formatNormalizedEffectValue(locale, value, effectMeta.effect),
+                          )}
+                        </span>
+                      </li>
                     )
                   })}
-                </div>
-              </div>
-            )}
+                </ul>
+              )}
+            </section>
           </div>
-        </aside>
+        </section>
       </main>
 
-      <footer className="panel planner-footer">
-        <div className="planner-footer__grid">
-          <section className="planner-footer__intro">
-            <p className="section-kicker">{t('footer.kicker')}</p>
+      <footer className="site-footer">
+        <div className="site-footer__inner">
+          <section>
             <h2>{t('footer.title')}</h2>
-            <p className="overview-note">{t('footer.description')}</p>
+            <p>{t('footer.description')}</p>
+            <p className="site-footer__version">
+              {t('planner.metric.datasetVersion', { version: APP_VERSION === 'dev' ? (dataset?.version ?? APP_VERSION) : APP_VERSION.slice(0, 7) })}
+            </p>
           </section>
 
-          <section className="planner-footer__links" aria-label={t('footer.title')}>
-            <a className="footer-link" href={PROJECT_REPO_URL} target="_blank" rel="noreferrer">
-              {t('footer.github')}
-            </a>
-            <a className="footer-link" href={PROJECT_ISSUES_URL} target="_blank" rel="noreferrer">
-              {t('footer.issues')}
-            </a>
-            <a className="footer-link" href={AUTHOR_PROFILE_URL} target="_blank" rel="noreferrer">
-              {t('footer.authorProfile')}
-            </a>
-          </section>
+          <nav className="site-footer__links" aria-label={t('footer.title')}>
+            <a href={PROJECT_REPO_URL} target="_blank" rel="noreferrer">{t('footer.github')}</a>
+            <a href={PROJECT_ISSUES_URL} target="_blank" rel="noreferrer">{t('footer.issues')}</a>
+            <a href={AUTHOR_PROFILE_URL} target="_blank" rel="noreferrer">{t('footer.authorProfile')}</a>
+          </nav>
 
-          <section className="planner-footer__notes">
-            <p className="footer-note footer-note--strong">{t('footer.maintainedBy', { name: 'kiletw' })}</p>
-            <p className="footer-note">{t('footer.dataSource')}</p>
-            <p className="footer-note">{t('footer.localeCoverage')}</p>
-            <p className="footer-note">{t('footer.disclaimer')}</p>
+          <section className="site-footer__notes">
+            <p><strong>{t('footer.maintainedBy', { name: 'kiletw' })}</strong></p>
+            <p>{t('footer.dataSource')}</p>
+            <p>{t('footer.localeCoverage')}</p>
+            <p>{t('footer.disclaimer')}</p>
           </section>
         </div>
       </footer>
+
+      <section className="ledger" aria-label={t('planner.summaryTitle')}>
+        <div className="ledger-power">
+          <strong className="big">+{formatCount(locale, totalGamePagePower)}</strong>
+          <small>{t('planner.totalGamePagePower')}</small>
+        </div>
+
+        <div className="ledger-time">
+          <strong className="big">{formatDuration(adjustedTimeSeconds)}</strong>
+          <small>{t('planner.totalTimeAdjusted')}</small>
+        </div>
+
+        <ul className="ledger-res">
+          {resourceTotals.map((resource) => (
+            <li key={resource.key} className={`res-${resource.key}`} title={formatCount(locale, resource.value)}>
+              <span>{resource.label}</span>
+              <strong>{formatCompactCount(locale, resource.value)}</strong>
+            </li>
+          ))}
+        </ul>
+
+        <div className="ledger-flags">
+          {maxAcademyLevel > 0 ? (
+            <span className="flag">{t('planner.maxAcademy')} Lv.{maxAcademyLevel}</span>
+          ) : null}
+          {missingRequirements.size > 0 ? (
+            <a className="flag flag--missing" href="#plan-details">
+              {t('planner.missingRequirements')} {missingRequirements.size}
+            </a>
+          ) : null}
+        </div>
+      </section>
     </div>
   )
 }
