@@ -1,30 +1,67 @@
+/* Academy War Table: slate base, one violet for the planned route and power gain,
+   fixed resource hues used only as small swatches next to text labels. */
 :root {
-  --text: #4f4335;
-  --text-h: #241a11;
-  --muted: #6d5a44;
-  --bg: #e8dcc1;
-  --bg-panel: rgba(255, 248, 234, 0.78);
-  --line: rgba(69, 49, 20, 0.16);
-  --accent: #8a5a13;
-  --accent-strong: #b67c1c;
-  --accent-soft: rgba(182, 124, 28, 0.14);
-  --success: #2f6a42;
-  --shadow: 0 24px 60px rgba(88, 58, 17, 0.14);
-  --sans: 'Trebuchet MS', Verdana, sans-serif;
-  --heading: 'Palatino Linotype', 'Book Antiqua', Georgia, serif;
-  --mono: 'Cascadia Code', Consolas, monospace;
+  --keep: #151d26;
+  --flag: #1f2a36;
+  --mortar: #34424f;
+  --rime: #dde4ea;
+  --fog: #93a1ae;
+  --rune: #a594ff;
+  --rune-soft: rgba(165, 148, 255, 0.2);
+  --ledger: #121a22;
+  --dots: #243140;
+  --edge: #2f3e4c;
 
-  font: 16px/1.55 var(--sans);
-  letter-spacing: 0.01em;
-  color: var(--text);
-  background:
-    radial-gradient(circle at top, rgba(255, 247, 229, 0.7), transparent 35%),
-    linear-gradient(180deg, #f2e8d2 0%, #e5d7b8 52%, #dac59f 100%);
+  --food: #9cc65a;
+  --stone: #b3bcc4;
+  --wood: #cc8f57;
+  --iron: #6fa8dc;
+  --gold: #e8be45;
+  --done: #5db389;
+  --missing: #e8695e;
+
+  --ledger-h: calc(88px + env(safe-area-inset-bottom, 0px));
+  --dock-h: 0px;
+
+  --font-cjk: system-ui;
+  --font-display: 'Sofia Sans Condensed Variable', var(--font-cjk), system-ui, sans-serif;
+  --font-text: 'Sofia Sans Variable', var(--font-cjk), system-ui, sans-serif;
+
+  color-scheme: dark;
+  background: var(--keep);
+  color: var(--rime);
+  font: 400 16px/1.5 var(--font-text);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --keep: #e3e7ea;
+    --flag: #f4f6f7;
+    --mortar: #c3cbd1;
+    --rime: #17212b;
+    --fog: #55636f;
+    --rune: #5b47d6;
+    --rune-soft: rgba(91, 71, 214, 0.16);
+    --ledger: #d9dfe3;
+    --dots: #cbd3d9;
+    --edge: #b7c1c9;
+    --done: #2a8460;
+    --missing: #b4372b;
+
+    color-scheme: light;
+  }
+}
+
+:root:lang(zh-TW) { --font-cjk: 'PingFang TC', 'Microsoft JhengHei', 'Noto Sans TC', system-ui; }
+:root:lang(zh-CN) { --font-cjk: 'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', system-ui; }
+:root:lang(ja) { --font-cjk: 'Hiragino Sans', 'Yu Gothic', 'Noto Sans JP', system-ui; }
+:root:lang(ko) { --font-cjk: 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', system-ui; }
+:root:lang(th) { --font-cjk: 'Noto Sans Thai', 'Thonburi', 'Leelawadee UI', system-ui; }
+:root:lang(ar) { --font-cjk: 'Noto Sans Arabic', 'Geeza Pro', 'Segoe UI', system-ui; }
 
 * {
   box-sizing: border-box;
@@ -37,36 +74,36 @@ html {
 body {
   margin: 0;
   min-height: 100vh;
+  background: var(--keep);
+  color: var(--rime);
 }
 
 #root {
   min-height: 100vh;
 }
 
-body,
 button,
 input,
 select {
   font: inherit;
+  color: inherit;
 }
 
 h1,
 h2,
 h3 {
-  font-family: var(--heading);
-  color: var(--text-h);
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--rime);
+  text-wrap: balance;
 }
 
-h1 {
-  font-size: clamp(2.6rem, 4vw, 4.5rem);
-  line-height: 0.95;
-}
-
-h2 {
-  font-size: clamp(1.5rem, 2vw, 2rem);
-}
-
-h3,
 p {
   margin: 0;
+}
+
+:focus-visible {
+  outline: 2px solid var(--rune);
+  outline-offset: 2px;
 }

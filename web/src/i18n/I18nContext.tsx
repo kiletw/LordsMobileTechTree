@@ -247,7 +247,7 @@ export const LanguageSwitcher: React.FC = () => {
   const { locale, setLocale, supportedLocales, t } = useI18n();
 
   return (
-    <div className="language-switcher">
+    <label className="language-switcher">
       <span className="language-switcher__label">{t('lang.label')}</span>
       <select
         value={locale}
@@ -260,6 +260,6 @@ export const LanguageSwitcher: React.FC = () => {
           </option>
         ))}
       </select>
-    </div>
+    </label>
   );
 };

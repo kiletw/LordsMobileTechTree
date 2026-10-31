@@ -1,5 +1,7 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
+import '@fontsource-variable/sofia-sans'
+import '@fontsource-variable/sofia-sans-condensed'
 import './index.css'
 import App from './App.tsx'
 import { I18nProvider } from './i18n/I18nContext.tsx'
