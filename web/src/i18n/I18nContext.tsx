@@ -38,6 +38,9 @@ const DEFAULT_LOCALE: Locale = 'en';
 /** UI fallback 語言 */
 const UI_FALLBACK_LOCALE: Locale = 'en';
 
+/** index.html 預設標題 (英文版沿用，確保爬蟲與瀏覽器看到相同標題) */
+const INITIAL_DOCUMENT_TITLE = document.title || 'Lords Mobile Tech Planner';
+
 /** localStorage key */
 const LOCALE_STORAGE_KEY = 'lmc-locale';
 
@@ -187,7 +190,9 @@ export const I18nProvider: React.FC<{ children: React.ReactNode }> = ({ children
   useEffect(() => {
     document.documentElement.lang = locale;
     document.documentElement.dir = locale === 'ar' ? 'rtl' : 'ltr';
-    document.title = (uiTranslations[locale] ?? uiTranslations[UI_FALLBACK_LOCALE] ?? {})['app.title'] ?? 'Lords Mobile Tech Planner';
+    document.title = locale === DEFAULT_LOCALE
+      ? INITIAL_DOCUMENT_TITLE
+      : (uiTranslations[locale] ?? uiTranslations[UI_FALLBACK_LOCALE] ?? {})['app.title'] ?? INITIAL_DOCUMENT_TITLE;
   }, [locale]);
 
   // UI 翻譯函數

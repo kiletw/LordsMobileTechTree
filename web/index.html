@@ -2,8 +2,11 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="%BASE_URL%favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="%BASE_URL%favicon.svg" />
+    <link rel="apple-touch-icon" href="%BASE_URL%apple-touch-icon.png" />
+    <meta name="theme-color" content="#151d26" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#e3e7ea" media="(prefers-color-scheme: light)" />
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-T2KBVKP831"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -12,9 +15,53 @@
 
       gtag('config', 'G-T2KBVKP831');
     </script>
-    <title>Lords Mobile Tech Planner</title>
+    <title>Lords Mobile Tech Planner: Research Cost, Time and Power Calculator</title>
+    <meta name="description" content="Free Lords Mobile tech planner: set current and target levels to get total resources, research time, special materials and power gain. Available in 20 languages." />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <link rel="canonical" href="https://kiletw.github.io/LordsMobileTechTree/" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Lords Mobile Tech Planner" />
+    <meta property="og:title" content="Lords Mobile Tech Planner: Research Cost, Time and Power Calculator" />
+    <meta property="og:description" content="Set current and target research levels to get total resources, research time, special materials and power gain. Free, in 20 languages." />
+    <meta property="og:url" content="https://kiletw.github.io/LordsMobileTechTree/" />
+    <meta property="og:image" content="https://kiletw.github.io/LordsMobileTechTree/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="A Lords Mobile tech tree with the planned research route highlighted" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Lords Mobile Tech Planner: Research Cost, Time and Power Calculator" />
+    <meta name="twitter:description" content="Set current and target research levels to get total resources, research time, special materials and power gain." />
+    <meta name="twitter:image" content="https://kiletw.github.io/LordsMobileTechTree/og-image.png" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Lords Mobile Tech Planner",
+        "url": "https://kiletw.github.io/LordsMobileTechTree/",
+        "description": "Plan Lords Mobile research: set current and target levels for each tech to see total resources, research time with a speed bonus, special materials and game-page power gain.",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript",
+        "isAccessibleForFree": true,
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "inLanguage": ["zh-TW", "en", "zh-CN", "ja", "ko", "id", "tr", "uk", "ar", "pl", "de", "es", "fr", "it", "lv", "ms", "pt", "ru", "th", "vi"],
+        "about": { "@type": "VideoGame", "name": "Lords Mobile" },
+        "author": { "@type": "Person", "name": "kiletw", "url": "https://github.com/kiletw" },
+        "sameAs": ["https://github.com/kiletw/LordsMobileTechTree"]
+      }
+    </script>
   </head>
   <body>
+    <noscript>
+      <h1>Lords Mobile Tech Planner</h1>
+      <p>
+        Plan Lords Mobile research: set current and target levels for each tech to see total resources,
+        research time, special materials and game-page power gain. This tool needs JavaScript to run.
+        It is an unofficial fan project.
+      </p>
+    </noscript>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
